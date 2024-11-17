@@ -1,0 +1,539 @@
+﻿@model AdminSide.Models.PaymentFormModel
+<style>
+    .b3 {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2, h3 {
+        background-color: #40a9ac;
+        color: white;
+        padding: 6px;
+        margin: 0;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .details-table, .reference-table {
+        width: 95%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+        .details-table th, .details-table td,
+        .reference-table th, .reference-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .details-table th, .reference-table th {
+            background-color: #799394;
+            color: white;
+            font-size: 13px;
+            padding: 7px;
+            text-align: center;
+        }
+
+        .details-table td strong {
+            font-weight: bold;
+        }
+
+    .reference-header {
+        text-align: center;
+        font-weight: bold;
+        color: blue;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .payment-details {
+        background-color: #f0f8ff;
+        padding: 15px 15px 0px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px auto;
+        text-align: left;
+    }
+
+    .pay-btn {
+        display: block;
+        margin: 9px auto;
+        padding: 9px 10px;
+        background-color: #f19058;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+        .pay-btn:hover {
+            background-color: #e67e22;
+        }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .details-table, .reference-table {
+            font-size: 14px;
+        }
+
+        .pay-btn {
+            width: 200px;
+            font-size: 14px;
+        }
+
+        h2, h3 {
+            font-size: 18px;
+        }
+    }
+
+    .swal2-title {
+        background-color: white !important;
+    }
+
+    #categoryDropdown {
+        height: 30px;
+        width: 320px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    #demand-draft, #UPI, #NEFTorIMPS, #CHEQUE, #RTGS, #CARD {
+        display: none;
+    }
+
+    .inputstyle {
+        height: 25px;
+        border-radius: 4px;
+        outline: none;
+        border: 1px solid #726e6e;
+    }
+</style>
+@{
+    int squareFeetValue;
+    bool isValid = int.TryParse(ViewBag.ConsumerPaymentFormData.sqare_feet, out squareFeetValue);
+}
+<div class="b3">
+    <div class="container">
+        <h3>Applicant Details</h3>
+        <p style="color: transparent; font-weight: 600; padding-top: 0px; text-align: center; margin-bottom: 10px;">@TempData["saveTransactionfail"]</p>
+        @Html.HiddenFor(model => model.IPAddress, new { id = "IPAddress" })
+        <table class="details-table">
+            <tr>
+                <td><strong>Firm Name</strong> : @ViewBag.ConsumerPaymentFormData.firm_name</td>
+                <td><strong>Applicant Name</strong> : @ViewBag.ConsumerPaymentFormData.owner_name</td>
+            </tr>
+            <tr>
+                <td><strong>Mobile No.</strong> : @ViewBag.ConsumerPaymentFormData.mobile_no</td>
+                <td><strong>DOE</strong> : @ViewBag.ConsumerPaymentFormData.doe.ToString("dd-MM-yyyy")</td>
+            </tr>
+            <tr>
+                <td><strong>Ward No.</strong> : @ViewBag.ConsumerPaymentFormData.ward_id</td>
+                @if (isValid && squareFeetValue <= 100)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (LESS THAN 100 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 100 && isValid && squareFeetValue <= 500)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (BETWEEN 100 AND 500 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 500 && isValid && squareFeetValue <= 1000)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (BETWEEN 500 AND 1000 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 1000)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (GREATER THAN 1000 SQFT)</td>
+                }
+            </tr>
+            <tr>
+                <td><strong>Business Address</strong> : @ViewBag.ConsumerPaymentFormData.bussiness_address</td>
+                <td><strong>License Type</strong> : NEW LICENSE</td>
+            </tr>
+        </table>
+
+        <h3>Your Reference Application</h3>
+        <div class="reference-header">
+            Your Application No. Is : <span style="color:green;">@ViewBag.ConsumerPaymentFormData.application_no</span>
+        </div>
+        <table class="reference-table">
+            <thead>
+                <tr>
+                    <th>Sl. No</th>
+                    <th>Account Head</th>
+                    <th>Period</th>
+                    <th>Actual Payable Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>License Fee</td>
+                    <td id="yearDisplay"></td>
+                    <td>@ViewBag.ConsumerPaymentFormData.total_Price</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="payment-details">
+            @*<h3>Payment Details</h3>
+                <div style="display:flex;flex-direction:column;">
+                    <div style="display: flex; justify-content: space-around;">
+                        <p style="text-align: center;">Arrear Amount: Rs. <span style="font-weight:600;">@ViewBag.ConsumerPaymentFormData.total_Price</span></p>
+                        <p style="text-align: center;">Current Amount: Rs. <span style="font-weight:600;">@ViewBag.ConsumerPaymentFormData.total_Price</span></p>
+                    </div>
+                    <div style="display: flex; justify-content: space-around;">
+                        <p style="text-align: center;">Total Amount: Rs. <span style="font-weight:600;">@ViewBag.ConsumerPaymentFormData.total_Price</span></p>
+                        <p style="text-align: center;">Total Payable Amount: Rs. <span style="font-weight:600;">@ViewBag.ConsumerPaymentFormData.total_Price</span></p>
+                    </div>
+                </div>*@
+            <hr />
+            @{
+                var categoryList = ViewBag.CategoryList as List<SelectListItem>;
+            }
+            @using (Html.BeginForm("ConsumerPaymentForm", "Home", FormMethod.Post))
+            {
+                <table class="details-table">
+                    <tr>
+                        <td style="width: 50%;">
+                            <strong>Payment Mode <span style="color:red;">*</span></strong> :
+                            @*<select id="paymentDropdown" name="category" onchange="showPaymentDetails()" style="height: 28px; width: 184px; border-radius: 4px;">
+                                    <option value="">Select Payment Mode</option>
+                                    @foreach (var item in ViewBag.CategoryList as List<SelectListItem>)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>*@
+                            @Html.DropDownListFor(
+                    model => model.paymentmode,
+                    new SelectList(ViewBag.CategoryList as List<SelectListItem>, "Value", "Text"),
+                    "Select Payment Mode",
+                    new { @class = "form-control", @id = "paymentDropdown", style = "height: 28px; width: 184px; border-radius: 4px;", onchange = "showPaymentDetails()" }
+                    )
+                            @Html.ValidationMessageFor(
+                                            model => model.paymentmode,
+                                            null,
+                                            new { @class = "text-danger", style = "color:red;" }
+                                            )
+                        </td>
+                        <td>
+                            <strong>Narration <span style="color:red;">*</span></strong> :
+                            @Html.TextBoxFor(model => model.Narration, new { @class = "form-control inputstyle" })
+                            @Html.ValidationMessageFor(model => model.Narration, null, new { @class = "text-danger", style = "color:red;" })
+                        </td>
+                    </tr>
+                </table>
+
+                <div id="CARD">
+                    <button type="button" class="pay-btn" id="submit">Pay Now</button>
+                </div>
+
+                <div id="RTGS">
+                    <table class="details-table">
+                        <tr>
+                            <td>
+                                <strong>Bank Name <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.CardbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.CardbankName, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>Branch <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.CardbankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.CardbankBranch, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <strong>RTGS No <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.RTGSNo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.RTGSNo, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>RTGS Date <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.RTGSDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;", type = "date" })
+                                @Html.ValidationMessageFor(model => model.RTGSDate, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div id="CHEQUE">
+                    <table class="details-table">
+                        <tr>
+
+                            <td>
+                                <strong>Bank Name <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.CHEQUEbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.CHEQUEbankName, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>Branch <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.CHEQUEbankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.CHEQUEbankBranch, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <strong>Cheque No <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.ChequeNo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.ChequeNo, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>Cheque Date <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.ChequeDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;", type = "date" })
+                                @Html.ValidationMessageFor(model => model.ChequeDate, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="NEFTorIMPS">
+                    <table class="details-table">
+                        <tr>
+
+                            <td>
+                                <strong>Bank Name <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.NEFTorIMPSbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.NEFTorIMPSbankName, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>Branch <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.NEFTorIMPSbankBranch, new { @class = "form-controlinputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.NEFTorIMPSbankBranch, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <strong>NEFT/IMPS No <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.NEFTorIMPSNo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.NEFTorIMPSNo, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>NEFT/IMPS Date <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.NEFTorIMPSDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;", type = "date" })
+                                @Html.ValidationMessageFor(model => model.NEFTorIMPSDate, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                @*<div id="UPI">
+                        <table class="details-table">
+                            <tr>
+                                <td>
+                                    <strong>Bank Name <span style="color:red;">*</span></strong> :
+                                    @Html.TextBoxFor(model => model.bankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                    @Html.ValidationMessageFor(model => model.bankName, null, new { @class = "text-danger", style = "color:red;" })
+                                </td>
+                                <td>
+                                    <strong>Branch <span style="color:red;">*</span></strong> :
+                                    @Html.TextBoxFor(model => model.bankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                    @Html.ValidationMessageFor(model => model.bankBranch, null, new { @class = "text-danger", style = "color:red;" })
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <strong>UPI No <span style="color:red;">*</span></strong> :
+                                    @Html.TextBoxFor(model => model.UPINo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                    @Html.ValidationMessageFor(model => model.UPINo, null, new { @class = "text-danger", style = "color:red;" })
+                                </td>
+                                <td>
+                                    <strong>UPI Date <span style="color:red;">*</span></strong> :
+                                    @Html.TextBoxFor(model => model.UPIDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                    @Html.ValidationMessageFor(model => model.UPIDate, null, new { @class = "text-danger", style = "color:red;" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>*@
+                <div id="demand-draft">
+                    <table class="details-table">
+                        <tr>
+                            <td>
+                                <strong>Bank Name <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.DDbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.DDbankName, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>Branch <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.DDbankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.DDbankBranch, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>DD No <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.DDNo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.ValidationMessageFor(model => model.DDNo, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                            <td>
+                                <strong>DD Date <span style="color:red;">*</span></strong> :
+                                @Html.TextBoxFor(model => model.DDDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;", type = "date" })
+                                @Html.ValidationMessageFor(model => model.DDDate, null, new { @class = "text-danger", style = "color:red;" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <button type="button" class="pay-btn" id="saveAllbutton">Submit All Data</button>
+            }
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.min.js" integrity="sha512-zK+mEmgBJpVrlnQXcbEfs6Ao4e+ESmepuHso+2UpRwMJbfhPGYNxAZz+IqsiK6/hGn8S1nx1mFOVBoJXJGx8PQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.css" integrity="sha512-TG239kA30BXeGpy+HpJei+qfJcKo8V9HKpe8UWuVdpk49NGUe86EDhmdXkCxMqD5gSlkLLi6YQ9SbNp+yRa9xQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script>
+    $(document).ready(function () {
+            $('#submit').click(function (e) {
+                e.preventDefault();
+
+                confirmbtn();
+             });
+
+        function confirmbtn() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to proceed !",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Proceed"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var IPAddress = $('#IPAddress').val();
+
+                    $.ajax({
+                        url: '@Url.Action("CounterOnlinePayment")',
+                        type: 'POST',
+                        data: { ipaddress: IPAddress },
+                        success: function (response) {
+                            window.location.href = response.redirectUrl;
+                        },
+                        error: function () {
+                            Swal.fire({
+                                position: "center",
+                                icon: "error",
+                                title: "Something went wrong!",
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#saveAllbutton').click(function (e) {
+            e.preventDefault();
+            confirmbtn();
+        });
+
+        function confirmbtn() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to proceed !",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Proceed"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var formData = $("form").serialize(); // Serialize form data, assuming the model is within a form
+                    var ipAddress = $('#IPAddress').val();
+                    formData += "&ipaddress=" + encodeURIComponent(ipAddress); // Append IP address to the serialized data
+
+                    $.ajax({
+                        url: '@Url.Action("ConsumerPaymentForm")',
+                        type: 'POST',
+                        data: formData,
+                        success: function (response) {
+                            console.log(response);
+                            if (response.redirectUrl) {
+                                window.location.href = response.redirectUrl;
+                            } else {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "error",
+                                    title: "Invalid redirect URL!",
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>
+
+<script>
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("IPAddress").value = data.ip;
+        })
+        .catch(error => {
+            console.error('Error fetching the IP address:', error);
+        });
+
+    window.onload = function () {
+        let currentYear = new Date().getFullYear();
+        let nextYear = currentYear + 1;
+        let yearRange = currentYear + " - " + nextYear;
+        document.getElementById('yearDisplay').textContent = yearRange;
+    };</script>
+<script>
+    function showPaymentDetails() {
+        var paymentModes = ['CARD', 'RTGS', 'CHEQUE', 'NEFTorIMPS', 'UPI'];
+
+        paymentModes.forEach(function (mode) {
+            var element = document.getElementById(mode);
+            if (element) {
+                element.style.display = 'none';
+            }
+        });
+
+
+        var selectedMode = document.getElementById("paymentDropdown").value;
+
+        if (selectedMode == "CARD") {
+            document.getElementById('saveAllbutton').style.display = 'none';
+            document.getElementById('submit').style.display = 'block';
+            document.getElementById(selectedMode).style.display = 'block';
+        }
+        else {
+            if (selectedMode && document.getElementById(selectedMode)) {
+                document.getElementById(selectedMode).style.display = 'block';
+                document.getElementById('submit').style.display = 'none';
+                document.getElementById('saveAllbutton').style.display = 'block';
+            }
+        }
+    }
+
+</script>
+

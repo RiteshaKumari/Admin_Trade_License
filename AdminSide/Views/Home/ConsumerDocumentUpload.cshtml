@@ -1,0 +1,403 @@
+﻿@model AdminSide.Models.index
+<style>
+    .b3 {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .status-box {
+        border: 1px solid #d6cfcf;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+        .status-box strong {
+            color: red;
+            font-size: 15px;
+        }
+
+        .status-box span {
+            font-weight: bold;
+            color: green;
+        }
+
+    .upload-section {
+        margin-bottom: 20px;
+    }
+
+        .upload-section h3 {
+            background-color: #e8dddd;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .upload-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .upload-section input[type="file"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-size: 0.9rem;
+        }
+
+        .upload-section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+    button {
+        display: block;
+        width: 120px;
+        padding: 10px;
+        border: none;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin: 20px auto 0;
+        text-align: center;
+    }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+    .mandatory-docs label {
+        color: #555;
+    }
+
+    @@media (max-width: 768px) {
+        .container {
+            width: 90%;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+        }
+
+        .upload-section h3 {
+            font-size: 1rem;
+            padding: 8px;
+        }
+
+        button {
+            width: 100px;
+        }
+    }
+
+    .LicenseHead {
+        background-color: #39A9B0;
+        border-radius: 5px;
+        text-align: center;
+        margin: 0px;
+        font-size: 1.5rem;
+        color: white;
+        padding: 3px;
+    }
+    .navbar .search-bar button {
+        margin-top: 0px !important;
+    }
+</style>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #F3E0E0;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+
+
+<div class="b3">
+    <div class="container">
+        <h6 class="LicenseHead">Consumer Document Upload</h6>
+        <p style="color:red;">@TempData["Error"]</p>
+
+        <div class="upload-section status-box">
+            <h3>Consumer Status </h3>
+            <p style=" color: black;">Your applied application no. is <strong>@ViewBag.application_no</strong>. You can use this application no. for future reference.</p>
+            <p><span style="color:blue;">Current Status:</span> <span>Document Not Uploaded</span></p>
+        </div>
+        @using (Html.BeginForm("ConsumerDocumentUpload", "Home", FormMethod.Post, new { id = "license-application-form", enctype = "multipart/form-data" }))
+        {
+            <div class="upload-section">
+                <h3>Applicant Identity Documents (Choose at least one):</h3>
+
+                <label><input type="checkbox" id="aadhaar-checkbox"> Aadhar Card</label>
+                @Html.TextBox("aadhaarfile", null, new { type = "file", @class = "form-control", id = "aadhaar-file", disabled = "disabled" })
+
+                <label><input type="checkbox" id="voter-checkbox"> Voter Card</label>
+                @Html.TextBox("voterfile", null, new { type = "file", @class = "form-control", id = "voter-file", disabled = "disabled" })
+
+                <label><input type="checkbox" id="pan-checkbox"> PAN Card</label>
+                @Html.TextBox("panfile", null, new { type = "file", @class = "form-control", id = "pan-file", disabled = "disabled" })
+            </div>
+
+            <div class="upload-section mandatory-docs">
+                <h3>Mandatory Documents:</h3>
+                <label>Application Form</label>
+                @Html.TextBox("applicationform", null, new { type = "file", @class = "form-control", required = "required", id = "application-form" })
+
+                <label> Rent Agreement</label>
+                @Html.TextBox("rentagreement", null, new { type = "file", @class = "form-control", required = "required", id = "rent-agreement" })
+
+                <label>Applicant Photo</label>
+                @Html.TextBox("photo", null, new { type = "file", @class = "form-control", required = "required", id = "photo" })
+
+                @Html.HiddenFor(model => model.IPAddress, new { id = "IPAddress" })
+                <script>fetch('https://api.ipify.org?format=json')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById("IPAddress").value = data.ip;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching the IP address:', error);
+                        });</script>
+            </div>
+
+            <button type="submit" id="upload-btn">Upload</button>
+        }
+
+    </div>
+
+</div>
+<!-- Modal for alert -->
+<div id="alert-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <p style="color:black;">Please upload at least one Non Mandetory document before submitting.</p>
+    </div>
+</div>
+<script>// File input elements
+    const aadhaarCheckbox = document.getElementById('aadhaar-checkbox');
+    const aadhaarFile = document.getElementById('aadhaar-file');
+
+    const voterCheckbox = document.getElementById('voter-checkbox');
+    const voterFile = document.getElementById('voter-file');
+
+    const panCheckbox = document.getElementById('pan-checkbox');
+    const panFile = document.getElementById('pan-file');
+
+    const applicationForm = document.getElementById('application-form');
+    const rentAgreement = document.getElementById('rent-agreement');
+    const photo = document.getElementById('photo');
+
+    const modal = document.getElementById('alert-modal');
+    const closeButton = document.querySelector('.close-button');
+
+    // Function to enable/disable file input based on checkbox
+    function toggleFileInput(checkbox, fileInput) {
+        fileInput.disabled = !checkbox.checked;
+        if (!checkbox.checked) {
+            fileInput.value = "";  // Clear file input if unchecked
+        }
+    }
+
+    // Event listeners for non-mandatory checkboxes
+    aadhaarCheckbox.addEventListener('click', function () {
+        toggleFileInput(aadhaarCheckbox, aadhaarFile);
+    });
+
+    voterCheckbox.addEventListener('click', function () {
+        toggleFileInput(voterCheckbox, voterFile);
+    });
+
+    panCheckbox.addEventListener('click', function () {
+        toggleFileInput(panCheckbox, panFile);
+    });
+
+    // Function to check file uploads and display modal if none selected
+    function checkFileUpload(e) {
+        const isAadhaarSelected = aadhaarCheckbox.checked && aadhaarFile.files.length > 0;
+        const isVoterSelected = voterCheckbox.checked && voterFile.files.length > 0;
+        const isPanSelected = panCheckbox.checked && panFile.files.length > 0;
+
+        if (!isAadhaarSelected && !isVoterSelected && !isPanSelected) {
+            e.preventDefault();  // Prevent form submission
+            modal.style.display = "block"; // Show modal
+        }
+    }
+
+    // Handle upload button click
+    document.getElementById('upload-btn').addEventListener('click', checkFileUpload);
+
+    // Close the modal when the close button is clicked
+    closeButton.addEventListener('click', function () {
+        modal.style.display = "none"; // Hide modal
+    });
+
+    // Close the modal when the user clicks outside of it
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none"; // Hide modal
+        }
+    });
+
+    // Max size validation for all file inputs
+    function validateFileSize(fileInput) {
+        const file = fileInput.files[0];
+        const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+
+        if (file && file.size > maxSize) {
+            alert("File size must not exceed 2MB.");
+            fileInput.value = ""; // Clear the input
+        }
+    }
+
+    // Add change event listeners for all file inputs with type validation
+    function validateFileType(fileInput, allowedTypes) {
+        const file = fileInput.files[0];
+        if (file) {
+            const fileType = file.type;
+
+            if (!allowedTypes.includes(fileType)) {
+                alert(`Invalid file type! Allowed types: ${allowedTypes.join(', ')}`);
+                fileInput.value = ""; // Clear the input
+            }
+        }
+    }
+
+    // Maximum allowed file name length
+    const maxFileNameLength = 100; // Set the maximum length for file names
+
+    // Function to validate file name length
+    function validateFileNameLength(fileInput) {
+        const file = fileInput.files[0];
+        if (file && file.name.length > maxFileNameLength) {
+            alert(`File name is too long! It should not exceed ${maxFileNameLength} characters.`);
+            fileInput.value = ""; // Clear the input
+        }
+    }
+    // Uncheck checkbox if no file is uploaded
+    function uncheckIfFileNotUploaded(checkbox, fileInput) {
+        if (fileInput.files.length === 0) {
+            checkbox.checked = false;
+            fileInput.disabled = true;
+        }
+    }
+    let uploadedFileNames = [];
+
+    // Function to validate unique file name
+    function validateUniqueFileName(fileInput) {
+        const file = fileInput.files[0];
+        if (file && uploadedFileNames.includes(file.name)) {
+            alert("File name already exists! Please upload a file with a different name.");
+            fileInput.value = ""; // Clear the input
+        } else if (file) {
+            // Add the file name to the list if it's unique
+            uploadedFileNames.push(file.name);
+        }
+    }
+
+    // Update change event listeners to include unique file name validation
+    aadhaarFile.addEventListener('change', function () {
+        validateFileSize(aadhaarFile);
+        validateFileType(aadhaarFile, ['application/pdf']);
+        validateFileNameLength(aadhaarFile);
+        validateUniqueFileName(aadhaarFile);
+
+    });
+    voterFile.addEventListener('change', function () {
+        validateFileSize(voterFile);
+        validateFileType(voterFile, ['application/pdf']);
+        validateFileNameLength(voterFile);
+        validateUniqueFileName(voterFile);
+
+    });
+    panFile.addEventListener('change', function () {
+        validateFileSize(panFile);
+        validateFileType(panFile, ['application/pdf']);
+        validateFileNameLength(panFile);
+        validateUniqueFileName(panFile);
+
+    });
+    applicationForm.addEventListener('change', function () {
+        validateFileSize(applicationForm);
+        validateFileType(applicationForm, ['application/pdf']);
+        validateFileNameLength(applicationForm);
+        validateUniqueFileName(applicationForm);
+    });
+    rentAgreement.addEventListener('change', function () {
+        validateFileSize(rentAgreement);
+        validateFileType(rentAgreement, ['application/pdf']);
+        validateFileNameLength(rentAgreement);
+        validateUniqueFileName(rentAgreement);
+    });
+    photo.addEventListener('change', function () {
+        validateFileSize(photo);
+        validateFileType(photo, ['image/jpeg', 'image/png', 'image/jpg']);
+        validateFileNameLength(photo);
+        validateUniqueFileName(photo);
+    });// Prevent form submission with Enter key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            checkFileUpload(e);
+        }
+    });</script>
+
+
+

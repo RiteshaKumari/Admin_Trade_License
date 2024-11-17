@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Trade Lisence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="~/Content/myCSS/SideNavbar.css" rel="stylesheet" />
+
+</head>
+<body class="body">
+    <div class="body">
+        <!-- Top Navbar -->
+        <div class="navbar" id="myNavbar">
+            <div class="logo">PMC</div>
+
+            @*<div class="search-bar">
+              <input class="searchinput" type="text" placeholder="🔍 Search" />
+              <button class="search">Search</button>
+        </div>*@
+            <div class="toggle-button" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <!-- HTML -->
+            <div class="user-profile" onclick="toggleDropdown(event)">
+                <i class="fas fa-user-circle fa-2x"></i>
+                <div class="dropdown-menu">
+                    <ul>
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                function toggleDropdown(event) {
+                    event.stopPropagation();
+                    const dropdown = document.querySelector('.user-profile .dropdown-menu');
+                    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+                }
+
+                // Hide the dropdown when clicking outside
+                window.addEventListener('click', function () {
+                    const dropdown = document.querySelector('.user-profile .dropdown-menu');
+                    if (dropdown) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+
+                // Prevent closing the dropdown when clicking inside
+                document.querySelector('.dropdown-menu').addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            </script>
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <i class="fas fa-user-circle fa-3x"></i>
+                <p>Welcome, <br>@TempData["name"] IT Team</p>
+            </div>
+            <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="#"><i class="fas fa-money-check"></i> Last Payment Update</a>
+            <a href="#"><i class="fas fa-money-check"></i> Property</a>
+            @* <a href="#" onclick="toggleSubNavbar(event)">
+            <div style="display: flex; justify-content: space-between;">
+                <span style="padding: 0px"><i class="fas fa-building"></i> Property</span>
+                <i class="fa-solid fa-caret-down" style="text-align: right"></i>
+            </div>
+        </a>
+        <div class="sub-navbar">
+            <a href="#">Sub Item 1</a>
+            <a href="#">Sub Item 2</a>
+            <a href="#">Sub Item 3</a>
+        </div>*@
+            <a href="#"><i class="fas fa-file"></i> PTR</a>
+            <a href="#"><i class="fas fa-folder"></i> New Assessment Details</a>
+            <a href="#"><i class="fas fa-upload"></i> Document Upload</a>
+            <a href="#"><i class="fas fa-file-invoice-dollar"></i> Property Tax Report</a>
+            <a href="#"><i class="fas fa-chart-bar"></i> DCB Report</a>
+            <a href="#"><i class="fas fa-id-card"></i> Waste Management</a>
+            <a href="#"><i class="fas fa-file-alt"></i> Waste Report</a>
+
+            <a href="#" onclick="toggleSubNavbar(event)">
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="padding: 0px"><i class="fas fa-building"></i> Trade License</span>
+                    <i class="fa-solid fa-caret-down" style="text-align: right"></i>
+                </div>
+            </a>
+            <div class="sub-navbar">
+                <a href="/newLicense">Trade License</a>
+                <a href="#">Track Status</a>
+                <a href="#">Payment of Application</a>
+            </div>
+
+            <a href="#" style="padding: 15px 20px 25px 20px;"><i class="fas fa-check-circle"></i> ML Approval</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            @RenderBody()
+            @*<h2 class="dashboard-title">WELCOME TO PATNA MUNICIPAL CORPORATION</h2>
+        <div class="dashboard-buttons">
+            <button>Property Dashboard</button>
+            <button>Trade Dashboard</button>
+            <button>Waste Management Dashboard</button>
+        </div>*@
+        </div>
+    </div>
+
+  
+
+    <footer>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function () {
+            var navbar = document.getElementById('myNavbar');
+            if (window.pageYOffset > 0) {
+                navbar.classList.add('sticky');
+            } else {
+                navbar.classList.remove('sticky');
+            }
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            if (sidebar.style.width === '250px' || sidebar.style.width === '') {
+                sidebar.style.width = '0';
+                mainContent.style.marginLeft = '0';
+
+                // Optionally, hide the sidebar after the transition for better UI
+                setTimeout(() => {
+                    sidebar.style.display = 'none';
+                }, 300); // Match the duration of the CSS transition
+            } else {
+                sidebar.style.display = 'block';
+                setTimeout(() => {
+                    sidebar.style.width = '250px';
+                    mainContent.style.marginLeft = '250px';
+                }, 10); // Slight delay to trigger the transition properly
+            }
+        }
+
+        function toggleSubNavbar(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const subNavbar = event.currentTarget.nextElementSibling;
+            if (subNavbar.classList.contains('show')) {
+                subNavbar.classList.remove('show');
+            } else {
+                subNavbar.classList.add('show');
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,570 @@
+﻿@{
+    Layout = null;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    .body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0px;
+        background-color: white;
+    }
+
+    .receipt-container {
+        max-width: 800px;
+        margin: auto;
+        background: #fff;
+        padding: 0px 20px 20px 20px;
+        border: 1px solid #333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        position: relative; /* Make sure the container is positioned */
+    }
+
+        .receipt-container::before {
+            background-image: url('../../content/custom_img/logopatnacorporation_water_mark.png');
+            content: "";
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 512px; /* or use "cover" */
+            opacity: 0.9;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none; /* Prevent the pseudo-element from blocking content */
+        }
+
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+        .header img {
+            position: absolute;
+            top: 60px;
+            left: 29px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 1.4em;
+        }
+
+    .header-box {
+        display: inline-block;
+        border: 2px solid black;
+        padding: 8px 15px;
+        margin-top: 0px;
+        font-size: 1.1em;
+        background-color: #ffffff;
+    }
+
+    .receipt-details, .amount-details {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 0.9em;
+    }
+
+        .receipt-details th, .receipt-details td,
+        .amount-details th, .amount-details td {
+            padding: 8px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+
+        .receipt-details th, .amount-details th {
+            background-color: #e0e0e0;
+        }
+
+    .footer {
+        margin-top: 20px;
+        font-size: 0.9em;
+    }
+
+    .note {
+        font-size: 15px;
+        color: black;
+        margin-top: 15px;
+    }
+
+        .note ul {
+            list-style-type: disc;
+            padding-left: 30px;
+            font-size: 13px;
+        }
+
+            .note ul li {
+                margin-bottom: 5px;
+                font-size: 15px;
+            }
+
+    .qr-code {
+        /* display: flex;*/
+        text-align: center;
+        margin-top: 10px;
+        /*   align-items: flex-end;
+        justify-content: space-between;*/
+    }
+
+    .signature {
+        display: flex;
+        margin-top: 30px;
+        font-size: 0.9em;
+        text-align: right;
+        justify-content: space-between;
+    }
+
+    /*    .tear-off {
+        margin-top: 30px;
+        border-top: 2px dashed #666;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 0.85em;
+    }*/
+    .tear-off {
+        margin-top: 30px;
+        border-top: 2px dashed #666;
+        padding-top: 10px;
+        text-align: left;
+        font-size: 0.85em;
+        position: relative;
+    }
+
+        .tear-off::before,
+        .tear-off::after {
+            content: '\f0c4'; /* Unicode for scissor icon in Font Awesome */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -12px; /* Adjust based on icon size */
+            font-size: 16px;
+            color: #666;
+        }
+
+        .tear-off::before {
+            left: 0; /* Position the icon on the left */
+        }
+
+        .tear-off::after {
+            transform: rotateY(180deg);
+            right: 0; /* Position the icon on the right */
+        }
+
+
+    .highlight {
+        font-weight: bold;
+    }
+
+    .table-no-border {
+        border: none;
+    }
+
+    @@media (max-width: 600px) {
+        .receipt-container {
+            padding: 15px;
+        }
+
+        .receipt-details, .amount-details {
+            font-size: 0.8em;
+        }
+
+        .header h2, .header h3 {
+            font-size: 1em;
+        }
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        padding-top: 0px;
+        align-items: center;
+    }
+
+    @@media print {
+        body {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .receipt-container {
+            width: 210mm; /* A4 width */
+            height: 297mm; /* A4 height */
+            margin: auto;
+            border: none;
+            box-shadow: none;
+        }
+
+        .print-button {
+            display: none !important;
+        }
+    }
+
+    .print-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+    }
+
+        .print-button:hover {
+            background-color: #45a049;
+        }
+
+        .print-button i {
+            font-size: 18px;
+        }
+</style>
+@{
+    int squareFeetValue;
+    bool isValid = int.TryParse(ViewBag.ConsumerPaymentReceipt.sqare_feet, out squareFeetValue);
+}
+<div class="body">
+    @*<button class="print-button" onclick="window.print()">Print Receipt</button>*@
+
+    <div class="receipt-container">
+        @*<div class="header">
+                <img src="~/Content/Custom_Img/Logo.png" alt="Logo">
+                <h2>Patna Municipal Corporation, Patna</h2>
+                <div class="header-box">
+                    <h3 style="margin: 0px;">Municipal License Fee<br>Payment Receipt (Temporary)</h3>
+                </div>
+            </div>*@
+        <div class="header">
+
+            <svg width="100%" height="130px">
+                <!-- Defining the path for the curved text -->
+                <defs>
+                    <!-- Adjust the path to move it higher -->
+                    <path id="curve" d="M73.2,122.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"></path>
+                </defs>
+
+                <!-- Adding the left logo image -->
+                <image href="/Content/Custom_Img/BiharSarkarLOGO.png" x="20" y="40" width="100" height="100"></image>
+
+                <!-- Adding the logo image inside the curve -->
+                <image href="/Content/Custom_Img/Logo.png" x="350" y="40" width="70" height="70"></image>
+
+                <!-- Adding the right logo image -->
+                <image href="/Content/Custom_Img/BiharSarkarLOGO.png" x="650" y="40" width="100" height="100"></image>
+
+                <!-- Using the path for the curved text -->
+                <text width="500" style="transform: translateX(145px);">
+                    <textPath href="#curve" startOffset="50%" text-anchor="middle" style="font-size: 24px; fill: black;">
+                        Patna Municipal Corporation, Patna
+                    </textPath>
+                </text>
+            </svg>
+
+
+
+            <div class="header-box">
+                <h3 style="margin: 0px;">Municipal License Fee Payment Receipt</h3>
+            </div>
+        </div>
+
+
+        <table class="receipt-details">
+            <tr>
+                <th>Receipt No.</th>
+                <td>@ViewBag.ConsumerPaymentReceipt.receipt_no</td>
+                <th>Transaction Date</th>
+
+                <td>
+                    <script>
+        // Input date string in the format {DD-MM-YYYY HH:MM:SS}
+        var inputDate = "@ViewBag.ConsumerPaymentReceipt.timestamp".replace(/[{}]/g, '');
+
+        // Split the date and time parts
+        var [datePart, timePart] = inputDate.split(' ');
+
+        // Split the date components
+        var [day, month, year] = datePart.split('-');
+
+        // Split the time components
+        var [hours, minutes, seconds] = timePart.split(':');
+
+        // Create a new Date object (months are 0-based in JavaScript)
+        var dateObj = new Date(year, month - 1, day, hours, minutes, seconds);
+
+        // Check if the date is valid
+        if (!isNaN(dateObj.getTime())) {
+            // Format the date components
+            var formattedDay = String(dateObj.getDate()).padStart(2, '0');
+            var formattedMonth = String(dateObj.getMonth() + 1).padStart(2, '0');
+            var formattedYear = dateObj.getFullYear();
+
+            // Format the time components
+            var formattedHours = dateObj.getHours();
+            var formattedMinutes = String(dateObj.getMinutes()).padStart(2, '0');
+            var ampm = formattedHours >= 12 ? 'PM' : 'AM';
+            formattedHours = formattedHours % 12;
+            formattedHours = formattedHours ? formattedHours : 12; // Convert 0 to 12 for midnight
+
+            // Construct the formatted date string
+            var formattedDate = formattedDay + '-' + formattedMonth + '-' + formattedYear + ' ' + formattedHours + ':' + formattedMinutes + ' ' + ampm;
+
+            // Write the formatted date to the table cell
+            document.write(formattedDate);
+        } else {
+            // Handle the case where the inputDate is invalid
+            document.write("Invalid date");
+        }
+                    </script>
+                </td>
+
+
+
+            </tr>
+            <tr>
+                <th>Department / Section</th>
+                <td>Municipal License Section</td>
+                <th>Print Date</th>
+                <td>
+                    <script>
+                        // Get the current date and time
+                        var dateObj = new Date();
+
+                        // Format the date components
+                        var day = String(dateObj.getDate()).padStart(2, '0');
+                        var month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                        var year = dateObj.getFullYear();
+
+                        // Format the time components
+                        var hours = dateObj.getHours();
+                        var minutes = String(dateObj.getMinutes()).padStart(2, '0');
+                        var ampm = hours >= 12 ? 'PM' : 'AM';
+                        hours = hours % 12;
+                        hours = hours ? hours : 12; // Convert 0 to 12 for midnight
+
+                        // Construct the formatted date string
+                        var formattedDate = day + '-' + month + '-' + year + ' ' + hours + ':' + minutes + ' ' + ampm;
+
+                        // Write the formatted date to the table cell
+                        document.write(formattedDate);
+                    </script>
+                </td>
+
+            </tr>
+            <tr>
+                <th>Account Description</th>
+                <td>Municipal License Fee Charges</td>
+                <th>Ward No.</th>
+                <td>@ViewBag.ConsumerPaymentReceipt.ward_id</td>
+            </tr>
+            <tr>
+                <th>Business Type</th>
+                @if (isValid && squareFeetValue <= 100)
+                {
+                    <td> LESS THAN 100 SQFT</td>
+                }
+                @if (isValid && squareFeetValue > 100 && isValid && squareFeetValue <= 500)
+                {
+                    <td> BETWEEN 100 AND 500 SQFT</td>
+                }
+                @if (isValid && squareFeetValue > 500 && isValid && squareFeetValue <= 1000)
+                {
+                    <td> BETWEEN 500 AND 1000 SQFT</td>
+                }
+                @if (isValid && squareFeetValue > 1000)
+                {
+                    <td> GREATER THAN 1000 SQFT</td>
+                }
+                <th>Application No.</th>
+                <td>@ViewBag.ConsumerPaymentReceipt.application_no</td>
+            </tr>
+            <tr>
+                <th>Business/Firm Name</th>
+                <td colspan="3">@ViewBag.ConsumerPaymentReceipt.firm_name</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td colspan="3">@ViewBag.ConsumerPaymentReceipt.address</td>
+            </tr>
+            <tr>
+                <th>Mobile No.</th>
+                <td colspan="3">@ViewBag.ConsumerPaymentReceipt.mobile_no</td>
+            </tr>
+            <tr>
+                <th colspan="1">A Sum of Rs. </th>
+                <td colspan="3" id="MyAmount">
+                    @ViewBag.ConsumerPaymentReceipt.total_payable_amount &nbsp;(Amount in Words)
+                </td>
+
+                <script>
+    function numberToWords(num) {
+        const belowTwenty = [
+            "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+            "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+        ];
+        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        const thousands = ["", "Thousand", "Million", "Billion"];
+
+        if (num === 0) return "Zero";
+
+        let word = '';
+
+        function helper(n) {
+            if (n < 20) return belowTwenty[n];
+            else if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 !== 0 ? " " + belowTwenty[n % 10] : "");
+            else return belowTwenty[Math.floor(n / 100)] + " Hundred" + (n % 100 !== 0 ? " " + helper(n % 100) : "");
+        }
+
+        let i = 0;
+        while (num > 0) {
+            if (num % 1000 !== 0) {
+                word = helper(num % 1000) + (thousands[i] ? " " + thousands[i] : "") + (word ? " " + word : "");
+            }
+            num = Math.floor(num / 1000);
+            i++;
+        }
+
+        return word.trim();
+    }
+
+    // Function to format the amount
+    function formatAmount(amount) {
+        const [integerPart, decimalPart] = amount.toString().split('.');
+        const integerWords = numberToWords(parseInt(integerPart, 10));
+        return `${parseFloat(amount).toLocaleString()} &nbsp;(${integerWords} Rupees Only)`;
+    }
+
+    // Get the amount from the ViewBag value (injected into the HTML)
+    const amount = parseFloat("@ViewBag.ConsumerPaymentReceipt.total_payable_amount");
+    document.querySelector("#MyAmount").innerHTML = formatAmount(amount);
+                </script>
+
+            </tr>
+            <tr>
+                <th>Towards</th>
+                <td colspan="3">
+                    Municipal License & Others vide Application no. @ViewBag.ConsumerPaymentReceipt.application_no,
+
+
+                    <script>
+        // Input date string in the format {DD-MM-YYYY HH:MM:SS} or similar
+        var inputDate = "@ViewBag.ConsumerPaymentReceipt.doe".replace(/[{}]/g, '').split(' ')[0];
+
+        // Split the date components
+        var [day, month, year] = inputDate.split('-');
+
+        // Construct the formatted date string
+        var formattedDate = day + '-' + month + '-' + year;
+
+        // Write the formatted date to the table cell
+        document.write("Dated: " + formattedDate);
+                    </script>
+
+
+            </tr>
+            <tr>
+                <th>Drawn on</th>
+                <td colspan="3">Online Payment</td>
+            </tr>
+        </table>
+
+        <table class="amount-details">
+            <tr>
+                <th>Account Description</th>
+                <th>Period</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td>Municipal License Fee (Current)</td>
+                <td id="yearDisplay"></td>
+                <td>@ViewBag.ConsumerPaymentReceipt.total_payable_amount</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Total Payable Amount</strong></td>
+                <td>@ViewBag.ConsumerPaymentReceipt.total_payable_amount</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Total Received Amount</strong></td>
+                <td><strong>@ViewBag.ConsumerPaymentReceipt.total_payable_amount</strong></td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <p>Received By: <strong>SUPER ADMIN</strong></p>
+                    <div class="note">
+                        <strong>Note:</strong>
+                        <ul>
+                            <li>This is a Computer generated Receipt and does not require physical signature.</li>
+                            <li>For Details Please Visit: pmcptax.bihar.gov.in or Call us at 155304.</li>
+                            <li>You may validate receipt by scanning QR Code.</li>
+                            <li>Cheque / Draft / Banker Cheque / Online payment are subject to realization.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="qr-code">
+                    <img src="~/Content/Custom_Img/qr.png" alt="QR Code" width="100">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="signature">
+            <p>In Collaboration With: </p>
+            <p>Signature of Tax Collector</p>
+        </div>
+
+
+        <div class="tear-off">
+            <p>
+                Received Receipt No. <strong>@ViewBag.ConsumerPaymentReceipt.receipt_no</strong> at <strong>
+                    <script>
+         // Input date string in the format {DD-MM-YYYY HH:MM:SS} or similar
+         var inputDate = "@ViewBag.ConsumerPaymentReceipt.doe".replace(/[{}]/g, '').split(' ')[0];
+
+         // Split the date components
+         var [day, month, year] = inputDate.split('-');
+
+         // Construct the formatted date string
+         var formattedDate = day + '-' + month + '-' + year;
+
+         // Write the formatted date to the table cell
+         document.write("Dated: " + formattedDate);
+                    </script>
+                </strong> of Rs <strong>@ViewBag.ConsumerPaymentReceipt.total_payable_amount</strong> against payment for<strong> Municipal License Fee</strong> of Application No.<strong> @ViewBag.ConsumerPaymentReceipt.application_no</strong> in Ward No.<strong> @ViewBag.ConsumerPaymentReceipt.ward_id</strong>
+            </p>
+        </div>
+        <div class="bottom">
+            <div style="display: flex; align-items: center;">
+                <p>Issued by Patna Municipal Corporation,Patna</p>&nbsp;<img src="~/Content/Custom_Img/sspl_mohar.png" alt="Logo" style="width:75px;">
+            </div>
+            <p>Signature of Recipient</p>
+        </div>
+    </div>
+    <div style="text-align: center; padding: 10px;">
+        <button class="print-button" onclick="window.print()">
+            <i class="fas fa-print"></i> Print Receipt
+        </button>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        let currentYear = new Date().getFullYear();
+        let nextYear = currentYear + 1;
+        let yearRange = currentYear + " - " + nextYear;
+        document.getElementById('yearDisplay').textContent = yearRange;
+    };
+</script>

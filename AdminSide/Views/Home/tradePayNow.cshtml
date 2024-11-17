@@ -1,0 +1,273 @@
+﻿@*@model TradeServices.Models.PaymentFormModel*@
+<style>
+    .b3 {
+        font-family: Arial, sans-serif;
+        background-color: #f3e0e0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2, h3 {
+        background-color: #40a9ac;
+        color: white;
+        padding: 6px;
+        margin: 0;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .details-table, .reference-table {
+        width: 95%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+        .details-table th, .details-table td,
+        .reference-table th, .reference-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .details-table th, .reference-table th {
+            background-color: #799394;
+            color: white;
+            font-size: 13px;
+            padding: 7px;
+            text-align: center;
+        }
+
+        .details-table td strong {
+            font-weight: bold;
+        }
+
+    .reference-header {
+        text-align: center;
+        font-weight: bold;
+        color: blue;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .payment-details {
+        background-color: #f0f8ff;
+        padding: 15px 15px 0px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px auto;
+        text-align: left;
+    }
+
+    .pay-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 6px 7px;
+        background-color: #f19058;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+        .pay-btn:hover {
+            background-color: #e67e22;
+        }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .details-table, .reference-table {
+            font-size: 14px;
+        }
+
+        .pay-btn {
+            width: 200px;
+            font-size: 14px;
+        }
+
+        h2, h3 {
+            font-size: 18px;
+        }
+    }
+
+    .swal2-title {
+        background-color: white !important;
+    }
+</style>
+@{
+    int squareFeetValue;
+    bool isValid = int.TryParse(ViewBag.ConsumerPaymentFormData.sqare_feet, out squareFeetValue);
+}
+<div class="b3">
+    <div class="container">
+        <h3>Applicant Details</h3>
+        <p style="color: red; font-weight: 600; padding-top: 10px; text-align: center; margin-bottom: 10px;">@TempData["saveTransactionfail"]</p>
+        <table class="details-table">
+            <tr>
+                <td><strong>Firm Name</strong> : @ViewBag.ConsumerPaymentFormData.firm_name</td>
+                <td><strong>Applicant Name</strong> : @ViewBag.ConsumerPaymentFormData.owner_name</td>
+            </tr>
+            <tr>
+                <td><strong>Mobile No.</strong> : @ViewBag.ConsumerPaymentFormData.mobile_no</td>
+                <td><strong>DOE</strong> : @ViewBag.ConsumerPaymentFormData.doe.ToString("dd-MM-yyyy")</td>
+            </tr>
+            <tr>
+                <td><strong>Ward No.</strong> : @ViewBag.ConsumerPaymentFormData.ward_id</td>
+                @if (isValid && squareFeetValue <= 100)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (LESS THAN 100 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 100 && isValid && squareFeetValue <= 500)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (BETWEEN 100 AND 500 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 500 && isValid && squareFeetValue <= 1000)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (BETWEEN 500 AND 1000 SQFT)</td>
+                }
+                @if (isValid && squareFeetValue > 1000)
+                {
+                    <td><strong>Business Type</strong> : @ViewBag.ConsumerPaymentFormData.BussinessType1 (GREATER THAN 1000 SQFT)</td>
+                }
+            </tr>
+            <tr>
+                <td><strong>Business Address</strong> : @ViewBag.ConsumerPaymentFormData.bussiness_address</td>
+                <td><strong>License Type</strong> : NEW LICENSE</td>
+            </tr>
+        </table>
+
+        <h3>Your Reference Application</h3>
+        <div class="reference-header">
+            Your Application No. Is : <span style="color:green;">@ViewBag.ConsumerPaymentFormData.application_no</span>
+        </div>
+        <table class="reference-table">
+            <thead>
+                <tr>
+                    <th>Sl. No</th>
+                    <th>Account Head</th>
+                    <th>Period</th>
+                    <th>Actual Payable Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>License Fee Current</td>
+                    <td id="yearDisplay"></td>
+                    <td>@ViewBag.ConsumerPaymentFormData.total_Price</td>
+                </tr>
+
+                @*<tr>
+                      <td colspan="3"><strong>Total</strong></td>
+                      <td><strong>300.00</strong></td>
+                    </tr>*@
+            </tbody>
+        </table>
+        <div class="payment-details">
+            <h3>Payment Details</h3>
+            <p style="font-weight: 600; padding-top: 20px; padding-bottom: 11px; color: black; text-align: center;">Total Payable Amount: Rs. @ViewBag.ConsumerPaymentFormData.total_Price</p>
+            <hr />
+            @*  <p style="color: red; font-weight: 600; padding-top: 18px;">Before proceeding for online payment please check the terms conditions</p>*@
+            <p style="color: red; font-weight: 600; padding-top: 10px; text-align: center; margin-bottom: 10px;">@TempData["error"]</p>
+            @using (Html.BeginForm("ConsumerPaymentForm", "Home", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "color:red;" })
+            //    @Html.HiddenFor(model => model.IPAddress, new { id = "IPAddress" })
+                <div>
+                    <input type="checkbox" id="terms" name="terms" value="true" />
+                    <label for="terms">
+                        I agree to
+                        <a href="#" style="color:blue;" id="termsCondition">Terms & Conditions</a>
+                    </label>
+                    @*    @Html.ValidationMessageFor(model => model.terms, "", new { @class = "text-danger" })*@
+                </div>
+                <br />
+                <button type="submit" class="pay-btn" id="submit">Proceed To Pay Online Using INDIAN Gateway</button>
+            }
+        </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.min.js" integrity="sha512-zK+mEmgBJpVrlnQXcbEfs6Ao4e+ESmepuHso+2UpRwMJbfhPGYNxAZz+IqsiK6/hGn8S1nx1mFOVBoJXJGx8PQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.css" integrity="sha512-TG239kA30BXeGpy+HpJei+qfJcKo8V9HKpe8UWuVdpk49NGUe86EDhmdXkCxMqD5gSlkLLi6YQ9SbNp+yRa9xQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script>
+    $(document).ready(function () {
+            $('#submit').click(function (e) {
+                e.preventDefault();
+                if (!$('#terms').is(':checked')) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Terms & Conditions',
+                        text: 'Please accept the terms and conditions to proceed.',
+                    });
+                    return;
+                }
+
+                confirmbtn();
+            });
+
+        function confirmbtn() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to proceed !",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Proceed"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Get form values
+                    var Input = $('#terms').is(':checked');
+                    var IPAddress = $('#IPAddress').val();
+
+                    $.ajax({
+                        url: '@Url.Action("ConsumerPaymentForm")',
+                        type: 'POST',
+                        data: { terms: Input, ipaddress: IPAddress },
+                        success: function (response) {
+                            window.location.href = response.redirectUrl;
+                        },
+                        error: function () {
+                            Swal.fire({
+                                position: "center",
+                                icon: "error",
+                                title: "Something went wrong!",
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+</script>
+<script>fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("IPAddress").value = data.ip;
+        })
+        .catch(error => {
+            console.error('Error fetching the IP address:', error);
+        });
+
+    window.onload = function () {
+        let currentYear = new Date().getFullYear();
+        let nextYear = currentYear + 1;
+        let yearRange = currentYear + " - " + nextYear;
+        document.getElementById('yearDisplay').textContent = yearRange;
+    };</script>

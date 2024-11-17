@@ -1,0 +1,445 @@
+﻿@model AdminSide.Models.NewLicense
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0px;
+    }
+
+    .form-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .form-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        flex: 1 1 calc(50% - 20px);
+        display: flex;
+        flex-direction: column;
+    }
+
+        .form-group.full-width {
+            flex: 1 1 100%;
+        }
+
+    select, input[type="text"], input[type="date"], textarea {
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .document-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding-top: 15px;
+    }
+
+        .document-list label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+    .apply-button {
+        text-align: center;
+        padding-top: 15px;
+    }
+
+        .apply-button button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .apply-button button:hover {
+                background-color: #218838;
+            }
+
+    .note {
+        color: red;
+    }
+
+    @@media(max-width: 768px) {
+        .form-group {
+            flex: 1 1 100%;
+        }
+    }
+
+    .label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+</style>
+
+<div class="container">
+    <div class="form-section">
+        <h2>Apply For New License</h2>
+        @using (Html.BeginForm("newLicense", "Home", FormMethod.Post))
+        {
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="label">Firm Type  <span style="color:red;">*</span></label>
+                    <div class="dropdown-wrapper" style="position: relative; width: 100%;">
+                        @Html.DropDownListFor(model => model.firm_type,
+                                                      (SelectList)ViewBag.SelectFirmType,
+                                                      "Select Type of your Credentials",
+                                                      new { @class = "form-control dropform-control", @id = "dropdown3", style = "width: 100%; padding-right: 30px;" }
+                                                  )
+
+                        @Html.ValidationMessageFor(model => model.firm_type, null, new { @class = "text-danger", style = "color:red;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Firm Name" class="label">
+                        @Html.LabelFor(model => model.firm_name, "Firm Name", new { @class = "control-label" })
+                        <span style="color:red;">*</span>
+                    </label>
+                    @Html.TextBoxFor(model => model.firm_name, new { @class = "form-control", @PlaceHolder = "Firm Name", Type = "text", required = "required" })
+
+                    @Html.ValidationMessageFor(model => model.firm_name, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="label">Applicant Name  <span style="color:red;">*</span></label>
+                    @Html.TextBoxFor(model => model.Consumer_Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Consumer_Name, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+
+                <div class="form-group">
+                    <label class="label">Mobile No  <span style="color:red;">*</span></label>
+                    @Html.TextBoxFor(model => model.mobile_no, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.mobile_no, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="propertyNo" class="label">Property No.<span style="color:red;">*</span></label>
+                    @Html.TextBoxFor(model => model.holding_no, new
+                    {
+                        @class = "form-control",
+                        @id = "PID",
+                        onchange = "handlePIDChange()"
+                    })
+                    @Html.ValidationMessageFor(model => model.holding_no, null, new { @class = "text-danger", style = "color:red;" })
+
+
+                </div>
+                <div class="form-group">
+                    <label for="DOE" class="label">
+                        Date Of Entry <span style="color:red;">*</span>
+                    </label>
+                    <div class="input">
+                        @Html.TextBoxFor(model => model.DOE, new
+                        {
+                            @class = "form-control",
+                            @PlaceHolder = "Select Date",
+                            type = "text",
+                            id = "datepicker",
+                            @readonly = "readonly",
+
+                            autocomplete = "off",
+                            style = "width: 98%;"
+                        })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DOE, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+
+                        const today = new Date();
+
+                        const day = String(today.getDate()).padStart(2, '0');
+                        const month = String(today.getMonth() + 1).padStart(2, '0');
+                        const year = today.getFullYear();
+
+                        const formattedDate = `${day}-${month}-${year}`;
+
+                        document.getElementById("datepicker").value = formattedDate;
+                    });
+                </script>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="label">Business Ward No  <span style="color:red;">* &nbsp; (Autofill a/c Property No)</span></label>
+                    @Html.TextBoxFor(model => model.Businessward_id, new { @class = "form-control", @id = "Businessward_id", @readonly = "readonly", @required = "required", style = " padding-right: 30px;" })
+                    @Html.ValidationMessageFor(model => model.Businessward_id, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+                <div class="form-group">
+                    <label class="label">Business Address  <span style="color:red;">* &nbsp; (Autofill a/c Property No)</span></label>
+                    @Html.TextBoxFor(model => model.business_address, new { @class = "form-control", @id = "business_addresss", @required = "required", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.business_address, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="label">Type of Ownership of Business Premises<span style="color:red;">*</span></label>
+                    <div class="dropdown-wrapper" style="position: relative; width: 100%;">
+                        @Html.DropDownListFor(model => model.occupancy_type_id,
+                                       (SelectList)ViewBag.SelectBusinessPremisesOwner,
+                                       "Select",
+                                       new { @class = "form-control dropform-control", @id = "dropdown1", style = "width: 100%; padding-right: 30px;" }
+                                        )
+                        @Html.ValidationMessageFor(model => model.occupancy_type_id, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label">Category Type<span style="color:red;">*</span></label>
+                    <div class="dropdown-wrapper" style="position: relative; width: 100%;">
+                        @Html.DropDownListFor(model => model.business_name,
+                                                                (SelectList)ViewBag.SelectCategory,
+                                                                "Select ",
+                                                                new { @class = "form-control dropform-control", style = "width: 100%; padding-right: 30px;", @id = "CategoryID" }
+                                                                )
+                     </div>
+                    @Html.ValidationMessageFor(model => model.business_name, null, new { @class = "text-danger", style = "color:red;" })
+
+                </div>
+
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="label">Business Area<span class="note"> * (Whole number in Square Feet)</span></label>
+                        @Html.TextBoxFor(model => model.BusinessSize, new { @class = "form-control", step = "1", @id = "businessSize", disabled = "disabled", oninput = "validateWholeNumber(this)" })
+                        @Html.ValidationMessageFor(model => model.BusinessSize, null, new { @class = "text-danger", style = "color:red;" })
+                        <span id="error-message" class="text-danger" style="display:none; color:red;">Please enter a whole number of less than length 6.</span>
+                    </div>
+
+                    <script>
+                        function validateWholeNumber(input) {
+
+                            if (input.value.match(/[^0-9]/) || input.value.length > 6) {
+                                document.getElementById('error-message').style.display = 'block';
+                            } else {
+                                document.getElementById('error-message').style.display = 'none';
+                            }
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="label">License Apply For  <span style="color:red;">*</span> <span class="note">(On 2 or 3 years 10% discount)</span></label>
+                    <div class="dropdown-wrapper" style="position: relative; width: 100%;">
+                        @Html.DropDownListFor(model => model.license_duration,
+                                                               (SelectList)ViewBag.SelectLisenceYear,
+                                                               "Select",
+                                                               new { @class = "form-control dropform-control", style = "width: 100%; padding-right: 30px;", id = "licenseDropdown", disabled = "disabled", onchange = "gettotalRate()" }
+                                                           )
+
+                        @Html.ValidationMessageFor(model => model.license_duration, null, new { @class = "text-danger", style = "color:red;" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="label">TOTAL PAYABLE AMOUNT<span style="color:red;">&nbsp; (Autofill)</span></label>
+                    @Html.TextBoxFor(model => model.totalRate, new { @class = "form-control", @id = "totalRate", @readonly = "readonly", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.totalRate, null, new { @class = "text-danger", style = "color:red;" })
+                </div>
+            </div>
+
+            @*<label class="label">Personal Document</label>
+
+            <div class="document-list">
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.LeaseAgreement, new { id = "leaseAgreement" }) Lease Agreement
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.RentAgreement, new { id = "rentAgreement" }) Rent Agreement
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.ApplicationForm, new { id = "applicationForm" }) Application Form
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.AadharCard, new { id = "aadharCard" }) Aadhar Card
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.PanCard, new { id = "panCard" }) PAN Card
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.VoterCard, new { id = "voterCard" }) Voter Card
+                </label>
+                <label class="label">
+                    @Html.CheckBoxFor(model => model.Photo, new { id = "photo" }) Photo
+                </label>
+            </div>*@
+
+            <div class="apply-button">
+                <button type="submit">Apply Now</button>
+            </div>
+        }
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function handlePIDChange() {
+        var Pid = document.querySelector("#PID").value;
+        var Businessward_id = document.querySelector("#Businessward_id");
+        var business_address = document.querySelector("#business_addresss");
+
+        if (Pid == "" || Pid == null) {
+            Businessward_id.value = ""
+            business_address.value = ""
+            Businessward_id.setAttribute("readonly", "readonly");
+            business_address.setAttribute("readonly", "readonly");
+        }
+        else {
+            var Data = {
+                pid: Pid
+            };
+
+            $.ajax({
+                url: 'PID_Changed',
+                type: 'POST',
+                data: Data,
+                success: function (response) {
+                    if (response && response.success && response.businessdata) {
+
+                        Businessward_id.value = response.businessdata.Businessward_id;
+                        business_address.value = response.businessdata.business_address;
+
+                        Businessward_id.setAttribute("readonly", "readonly");
+                        business_address.setAttribute("readonly", "readonly");
+                    } else {
+                        Businessward_id.value = ""
+                        business_address.value = ""
+                        Businessward_id.setAttribute("readonly", "readonly");
+                        business_address.setAttribute("readonly", "readonly");
+
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Enter correct Property No',
+                            showConfirmButton: true
+                        });
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Request Failed:", textStatus, errorThrown);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Enter correct Property No',
+                        showConfirmButton: true
+                    });
+                }
+            });
+        }
+    }
+</script>
+
+
+
+<script>
+    document.getElementById("CategoryID").addEventListener("change", function () {
+        var selectedValue = this.value;
+        if (selectedValue) {
+            document.getElementById("businessSize").removeAttribute("disabled");
+        }
+        else {
+            document.getElementById("businessSize").setAttribute("disabled", "disabled");
+        }
+    });
+    document.getElementById("businessSize").addEventListener("change", function () {
+        var selectedValue = this.value;
+        var licenseDropdown = document.getElementById("licenseDropdown");
+        // Check if something valid is selected
+        if (selectedValue) {
+            licenseDropdown.removeAttribute("disabled");
+        } else {
+            licenseDropdown.setAttribute("disabled", "disabled");
+        }
+    });
+</script>
+<script>
+    function gettotalRate() {
+        var CategoryID = document.querySelector("#CategoryID").value;
+        var licenseDropdown = document.querySelector("#licenseDropdown").value;
+        var businessSizeDropdown = document.querySelector("#businessSize").value;
+
+        if (licenseDropdown === "" || businessSizeDropdown === "") {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error',
+                text: 'Please select a license year and business size.',
+                showConfirmButton: true
+            });
+            return;
+        }
+
+        var Data = {
+            CategoryID: CategoryID,
+            License_Year: licenseDropdown,
+            bussiness_size: businessSizeDropdown
+        };
+        $.ajax({
+            url: 'getTotalRate',
+            type: 'POST',
+            data: Data,
+            success: function (response) {
+                if (response.success) {
+                    var totalRate = response.totalRate;
+                    // document.querySelector("#totalRate").value = totalRate;
+                    document.querySelector("#totalRate").value = parseInt(totalRate, 10);
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message || 'Failed to calculate total rate.',
+                        showConfirmButton: true
+                    });
+                    document.querySelector("#totalRate").value = totalRate;
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Request Failed:", textStatus, errorThrown);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error in retrieving the total rate.',
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
+</script>

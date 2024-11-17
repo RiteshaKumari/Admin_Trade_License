@@ -1,0 +1,111 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|d:\\projects\\pmc_projects\\admin_trade_services\\adminside\\adminside\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|solutionrelative:adminside\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\adminside\\views\\home\\consumerpaymentform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|solutionrelative:adminside\\views\\home\\consumerpaymentform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|d:\\projects\\pmc_projects\\admin_trade_services\\adminside\\adminside\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|solutionrelative:adminside\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\adminside\\views\\home\\chequecustomerreceipt.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A5C15701-E41A-402A-8BDB-0E117D7C3D68}|AdminSide\\AdminSide.csproj|solutionrelative:adminside\\views\\home\\chequecustomerreceipt.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Web.config",
+              "RelativeDocumentMoniker": "AdminSide\\Web.config",
+              "ToolTip": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Web.config",
+              "RelativeToolTip": "AdminSide\\Web.config",
+              "ViewState": "AQIAACsAAAAAAAAAAAAAADsAAAB1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-11-16T15:21:15.566Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CHEQUECustomerReceipt.cshtml",
+              "DocumentMoniker": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Views\\Home\\CHEQUECustomerReceipt.cshtml",
+              "RelativeDocumentMoniker": "AdminSide\\Views\\Home\\CHEQUECustomerReceipt.cshtml",
+              "ToolTip": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Views\\Home\\CHEQUECustomerReceipt.cshtml",
+              "RelativeToolTip": "AdminSide\\Views\\Home\\CHEQUECustomerReceipt.cshtml",
+              "ViewState": "AQIAAB8CAAAAAAAAAAAowDkCAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-16T11:55:45.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConsumerPaymentForm.cshtml",
+              "DocumentMoniker": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Views\\Home\\ConsumerPaymentForm.cshtml",
+              "RelativeDocumentMoniker": "AdminSide\\Views\\Home\\ConsumerPaymentForm.cshtml",
+              "ToolTip": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Views\\Home\\ConsumerPaymentForm.cshtml",
+              "RelativeToolTip": "AdminSide\\Views\\Home\\ConsumerPaymentForm.cshtml",
+              "ViewState": "AQIAAGEBAAAAAAAAAADgv2oBAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-15T08:25:37.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "AdminSide\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Projects\\PMC_Projects\\Admin_Trade_Services\\AdminSide\\AdminSide\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "AdminSide\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAHoEAAAAAAAAAAAUwIoEAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-10T12:40:15.567Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

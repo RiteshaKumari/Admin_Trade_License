@@ -1,0 +1,178 @@
+﻿@model AdminSide.Models.otp
+@{
+    Layout = null;
+}
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="~/Content/myCSS/loginOTP.css" rel="stylesheet" />
+
+<div class="align body">
+    <div style=" display: flex; align-items: center; justify-content: center; margin: 0px; flex-direction: column; padding-bottom: 100px !important;">
+        <img style="padding-right: 20px;" src="~/Content/Custom_Img/Logo.png" />
+        <h1 style="color:white">Patna Municipal Corperation</h1>
+    </div>
+
+    <div class="grid" style=" margin-top: -30px;">
+
+        @using (Html.BeginForm("OTP", "Home", FormMethod.Post, new { @class = "form login" }))
+        {
+            <div class="form__field">
+                <label for="login__otp">
+                    <i class="fa-solid fa-thumbs-up"></i><span class="hidden">OTP</span>
+                </label>
+                <p style="color:red;">@TempData["OTPError"]</p>
+                @Html.TextBoxFor(model => model.myotp, new { @class = "form__input", @placeholder = "Enter OTP", type = "text", id = "login__otp", required = "required", autocomplete = "one-time-code" })
+                @Html.ValidationMessageFor(model => model.myotp, null, new { @class = "text-danger" })
+            </div>
+
+            <p id="timer">@ViewBag.Timer</p>
+
+            <div class="form__field">
+                <input type="button" value="Submit" id="otpSubmit">
+            </div>
+
+            <p id="msg" style="margin:0px;"></p>
+            <div class="form__field">
+                <input type="button" value="Resend OTP" id="resendOtp" disabled>
+            </div>
+        }
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="icons">
+        <symbol id="icon-arrow-right" viewBox="0 0 1792 1792">
+            <path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z" />
+        </symbol>
+        <symbol id="icon-lock" viewBox="0 0 1792 1792">
+            <path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z" />
+        </symbol>
+        <symbol id="icon-user" viewBox="0 0 1792 1792">
+            <path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z" />
+        </symbol>
+    </svg>
+
+</div>
+<script>
+    $(document).ready(function () {
+        var countdown = 60; // Initial countdown in 60 seconds
+        var timerElement = document.getElementById("timer");
+        var interval;
+
+        function startTimer() {
+            interval = setInterval(function () {
+                var minutes = Math.floor(countdown / 60);
+                var seconds = countdown % 60;
+                timerElement.innerText = "Code in " + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(interval);
+                    document.getElementById("resendOtp").disabled = false;
+                    document.getElementById("otpSubmit").disabled = true;
+                }
+            }, 1000);
+        }
+
+        startTimer();
+
+        function resetTimer() {
+            clearInterval(interval);
+            countdown = 60;
+            startTimer();
+        }
+
+       $('#resendOtp').on('click', function () {
+       $.ajax({
+          url: '@Url.Action("resendOTP")',
+          type: 'POST',
+           success: function (response) {
+               Swal.fire({
+                   position: "center",
+                   icon: "success",
+                   title: "Otp Send successfully !",
+                   showConfirmButton: false,
+                   timer: 1500
+               });
+               resetTimer();
+               document.getElementById("resendOtp").disabled = true;
+               document.getElementById("otpSubmit").disabled = false;
+        },
+          error: function () {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: "An error occurred while resending OTP.",
+              });
+          }
+      });
+       });
+
+    $('#otpSubmit').on('click', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        $.ajax({
+            url: '@Url.Action("OTP")',
+            type: 'POST',
+            data: $('form').serialize(), // Serialize form data for sending
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        // Redirect if the response contains a URL
+                        if (response.redirectUrl) {
+                            window.location.href = response.redirectUrl;
+                        }
+                    });
+                } else {
+                    // Check for specific returnValue cases and handle them
+                    if (response.returnValue === -1) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: "You have reached the maximum number of attempts. Please wait for 30 min before trying again."
+                        });
+                        document.getElementById("msg").innerHTML = "Retry after sometime !"
+                        document.getElementById("timer").style.display = "none";
+                        document.getElementById("resendOtp").disabled = true;
+                        document.getElementById("otpSubmit").disabled = true;
+                    } else if (response.returnValue === -99) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: "An unexpected error occurred. Please try again."
+                        });
+                    } else {
+                        // General error message for other cases
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                }
+            },
+           error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "An error occurred while processing your request."
+                });
+            }
+        });
+    });
+
+
+    });
+</script>

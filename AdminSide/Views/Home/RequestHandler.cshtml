@@ -1,0 +1,301 @@
+﻿@model AdminSide.Models.index
+<style>
+    .bodyyy {
+        padding: 0px;
+        margin: 0px;
+        background-color: #6D214F !important;
+        width: 100%;
+        height: 91vh;
+
+    }
+
+    .wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: fit-content;
+        height: auto;
+    }
+
+    .button {
+        width: 200px;
+        height: 70px;
+        background: linear-gradient(to left top, #c32c71 50%, #b33771 50%);
+        border-style: none;
+        color: #fff;
+        font-size: 23px;
+        letter-spacing: 3px;
+        font-family: 'Lato';
+        font-weight: 600;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        padding: 0px;
+        overflow: hidden;
+        transition: all .5s;
+        box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+    }
+
+        .button span {
+            position: absolute;
+            display: block;
+        }
+
+            .button span:nth-child(1) {
+                height: 3px;
+                width: 200px;
+                top: 0px;
+                left: -200px;
+                background: linear-gradient(to right, rgba(0,0,0,0), #f6e58d);
+                border-top-right-radius: 1px;
+                border-bottom-right-radius: 1px;
+                animation: span1 2s linear infinite;
+                animation-delay: 1s;
+            }
+
+    @@keyframes span1 {
+        0% {
+            left: -200px
+        }
+
+        100% {
+            left: 200px;
+        }
+    }
+
+    .button span:nth-child(2) {
+        height: 70px;
+        width: 3px;
+        top: -70px;
+        right: 0px;
+        background: linear-gradient(to bottom, rgba(0,0,0,0), #f6e58d);
+        border-bottom-left-radius: 1px;
+        border-bottom-right-radius: 1px;
+        animation: span2 2s linear infinite;
+        animation-delay: 2s;
+    }
+
+    @@keyframes span2 {
+        0% {
+            top: -70px;
+        }
+
+        100% {
+            top: 70px;
+        }
+    }
+
+    .button span:nth-child(3) {
+        height: 3px;
+        width: 200px;
+        right: -200px;
+        bottom: 0px;
+        background: linear-gradient(to left, rgba(0,0,0,0), #f6e58d);
+        border-top-left-radius: 1px;
+        border-bottom-left-radius: 1px;
+        animation: span3 2s linear infinite;
+        animation-delay: 3s;
+    }
+
+    @@keyframes span3 {
+        0% {
+            right: -200px;
+        }
+
+        100% {
+            right: 200px;
+        }
+    }
+
+    .button span:nth-child(4) {
+        height: 70px;
+        width: 3px;
+        bottom: -70px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0,0,0,0), #f6e58d);
+        border-top-right-radius: 1px;
+        border-top-left-radius: 1px;
+        animation: span4 2s linear infinite;
+        animation-delay: 4s;
+    }
+
+    @@keyframes span4 {
+        0% {
+            bottom: -70px;
+        }
+
+        100% {
+            bottom: 70px;
+        }
+    }
+
+    .button:hover {
+        transition: all .5s;
+        transform: rotate(-3deg) scale(1.1);
+        box-shadow: 0px 3px 5px rgba(0,0,0,.4);
+    }
+
+        .button:hover span {
+            animation-play-state: paused;
+        }
+
+    footer {
+        margin-top: 0px !important;
+    }
+</style>
+<div class="bodyyy">
+    <div class="wrapper">
+        <button id="rzp-button1" class="button">
+            Click to Pay
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    @Html.HiddenFor(model => model.IPAddress, new { id = "IPAddress" })
+    <script>
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("IPAddress").value = data.ip;
+            })
+            .catch(error => {
+                console.error('Error fetching the IP address:', error);
+            });
+    </script>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var IPAddress = document.querySelector("#IPAddress").value;
+var options = {
+  //  "key": "rzp_live_0nlwx1xD3328Ee",
+    "key": "rzp_test_Xl5GKpLJQb6PLe",
+    "amount": "@TempData["TotalAmt"]", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Patna Nagar Nigam", //your business name
+    "description": "Test Transaction",
+    "image": "~/Content/Custom_Img/Logo.png",
+    "order_id": "@ViewBag.OrderId", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+    "handler": function (response){
+        //alert(response.razorpay_payment_id);
+        //alert(response.razorpay_order_id);
+        //alert(response.razorpay_signature);
+
+        if (response.razorpay_payment_id != null && response.razorpay_order_id != null && response.razorpay_signature != null) {
+            var Data = {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                IPAddress: IPAddress
+            };
+              $.ajax({
+                url: 'PaymentSuccess',
+                type: 'POST',
+                data: Data,
+                success: function (response) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Your Payment is success !',
+                        showConfirmButton: true
+                    });
+                    window.location.href = response.redirectUrl;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Request Failed:", textStatus, errorThrown);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Something went wrong',
+                        showConfirmButton: true
+                    });
+                }
+            });
+
+        }
+        else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong !',
+                showConfirmButton: true
+            });
+        }
+        },
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+        "name": "@ViewBag.Detail.Consumer_Name", //your customer's name
+        "email": "@ViewBag.Detail.email_id",
+        "contact": "@ViewBag.Detail.mobile_no"  //Provide the customer's phone number for better conversion rates
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    },
+    "callback_url": {
+        "url": "https://localhost:44388/RequestHandler"
+    },
+    "customer_id": {
+        "customerID" : "12121"
+    }
+};
+var rzp1 = new Razorpay(options);
+
+
+rzp1.on('payment.failed', function (response) {
+    //   alert(response.error.code);
+    //   alert(response.error.description);
+    //   alert(response.error.source);
+    //   alert(response.error.step);
+    //   alert(response.error.reason);
+    //    alert(response.error.metadata.order_id);
+    //alert(response.error.metadata.payment_id);
+    var IPAddress = document.querySelector("#IPAddress").value;
+    if (response.error.code != null && response.error.description != null && response.error.source != null && response.error.step != null && response.error.reason != null && response.error.metadata.order_id != null && response.error.metadata.payment_id != null) {
+        var Data = {
+            order_id: response.error.metadata.order_id,
+            IPAddress: IPAddress
+        };
+
+        $.ajax({
+            url: 'PaymentFailure',
+            type: 'POST',
+            data: Data,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong !',
+                    showConfirmButton: true
+                });
+                window.location.href = response.redirectUrl;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Request Failed:", textStatus, errorThrown);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Enter correct Property No',
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
+
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}</script>
