@@ -20,6 +20,7 @@ namespace AdminSide.Controllers
     [HandleError]
     public class HomeController : Controller
     {
+        PMC_Sparrow_DataEntities EF = new PMC_Sparrow_DataEntities();
         private Utility ul = new Utility();
         public string EncodeToBase64UrlSafe(string plainText)
         {

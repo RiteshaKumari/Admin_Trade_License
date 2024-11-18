@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74fcb25ef9c64084948cca4341c2faec" Name="Diagram1">
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.rit_citizenOTPCount" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_document_mstr" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_document_upload" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_license_detail_temp" Width="1.5" PointX="7.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_license_details" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_license_mail" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_license_mstr" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMC_Sparrow_DataModel.tbl_ml_transaction_details" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="PMC_Sparrow_DataModel.FK__tbl_docum__doc_m__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="PMC_Sparrow_DataModel.FK__tbl_docum__licen__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="PMC_Sparrow_DataModel.FK__tbl_licen__licen__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="PMC_Sparrow_DataModel.FK__tbl_licen__licen__2116E6DF" ManuallyRouted="false" />
+        <AssociationConnector Association="PMC_Sparrow_DataModel.FK__tbl_trans__licen__65370702" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
