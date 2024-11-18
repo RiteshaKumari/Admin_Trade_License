@@ -26,7 +26,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: 512px; /* or use "cover" */
-            opacity: 0.9;
+            opacity: 0.6;
             position: absolute;
             top: 0;
             left: 0;
@@ -239,12 +239,12 @@
 
     <div class="receipt-container">
         @*<div class="header">
-                <img src="~/Content/Custom_Img/Logo.png" alt="Logo">
-                <h2>Patna Municipal Corporation, Patna</h2>
-                <div class="header-box">
-                    <h3 style="margin: 0px;">Municipal License Fee<br>Payment Receipt (Temporary)</h3>
-                </div>
-            </div>*@
+            <img src="~/Content/Custom_Img/Logo.png" alt="Logo">
+            <h2>Patna Municipal Corporation, Patna</h2>
+            <div class="header-box">
+                <h3 style="margin: 0px;">Municipal License Fee<br>Payment Receipt (Temporary)</h3>
+            </div>
+        </div>*@
         <div class="header">
 
             <svg width="100%" height="130px">
@@ -270,8 +270,6 @@
                     </textPath>
                 </text>
             </svg>
-
-
 
             <div class="header-box">
                 <h3 style="margin: 0px;">Municipal License Fee Payment Receipt</h3>
@@ -327,9 +325,6 @@
         }
                     </script>
                 </td>
-
-
-
             </tr>
             <tr>
                 <th>Department / Section</th>
@@ -395,6 +390,7 @@
             <tr>
                 <th>Address</th>
                 <td colspan="3">@ViewBag.ConsumerPaymentReceipt.address</td>
+
             </tr>
             <tr>
                 <th>Mobile No.</th>
@@ -453,9 +449,7 @@
             <tr>
                 <th>Towards</th>
                 <td colspan="3">
-                    Municipal License & Others vide Application no. @ViewBag.ConsumerPaymentReceipt.application_no,
-
-
+                    Municipal License & Others vide - @ViewBag.ConsumerPaymentReceipt.payment_mode,  CHEQUE NO:@ViewBag.ConsumerPaymentReceipt.cheque_no
                     <script>
         // Input date string in the format {DD-MM-YYYY HH:MM:SS} or similar
         var inputDate = "@ViewBag.ConsumerPaymentReceipt.doe".replace(/[{}]/g, '').split(' ')[0];
@@ -469,15 +463,18 @@
         // Write the formatted date to the table cell
         document.write("Dated: " + formattedDate);
                     </script>
-
-
-            </tr>
+</tr>
+            @*<tr>
+                <th>towards Municipal License & Others vide</th>
+                <td colspan="3">@ViewBag.ConsumerPaymentReceipt.payment_mode, CHEQUE NO:@ViewBag.ConsumerPaymentReceipt.cheque_no</td>
+            </tr>*@
             <tr>
-                <th>Drawn on</th>
-                <td colspan="3">Online Payment</td>
+                <th>Drawn on Bank Name</th>
+                <td colspan="3">@ViewBag.ConsumerPaymentReceipt.bank_name</td>
             </tr>
-        </table>
 
+        </table>
+        <h4>N.B.Online Payment/Cheque/Draft/ Bankers Cheque are Subject to realisation</h4>
         <table class="amount-details">
             <tr>
                 <th>Account Description</th>
@@ -502,7 +499,7 @@
         <div class="footer">
             <div style="display: flex; justify-content: space-between;">
                 <div>
-                    <p>Received By: <strong>SUPER ADMIN</strong></p>
+                    <p>Received By: <strong>@TempData["AdminName"] IT Team</strong></p>
                     <div class="note">
                         <strong>Note:</strong>
                         <ul>

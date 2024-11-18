@@ -13,6 +13,8 @@ namespace AdminSide.Models
         public long mobile_no { get; set; }
         public long ward_id { get; set; }
         public string ward_idd { get; set; }
+        public string payment_mode { get; set; }
+        public string cheque_no { get; set; }
         public string holding_no { get; set; }
         public int payment_status { get; set; }
         public int Is_Near_Expiry { get; set; }
@@ -23,7 +25,9 @@ namespace AdminSide.Models
         public string circle { get; set; }
         public string receipt_no { get; set; }
         public string owner_name { get; set; }
+        public string bank_name { get; set; }
         public DateTime doe { get; set; }
+        public DateTime cheque_date { get; set; }
         public string BussinessType1 { get; set; }
         public string sqare_feet { get; set; }
         public decimal payable_amt { get; set; }

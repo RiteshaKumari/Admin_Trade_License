@@ -246,12 +246,12 @@
                         <tr>
                             <td>
                                 <strong>Bank Name <span style="color:red;">*</span></strong> :
-                                @Html.TextBoxFor(model => model.CardbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.TextBoxFor(model => model.RTGSbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
                                 @Html.ValidationMessageFor(model => model.CardbankName, null, new { @class = "text-danger", style = "color:red;" })
                             </td>
                             <td>
                                 <strong>Branch <span style="color:red;">*</span></strong> :
-                                @Html.TextBoxFor(model => model.CardbankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
+                                @Html.TextBoxFor(model => model.RTGSbankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
                                 @Html.ValidationMessageFor(model => model.CardbankBranch, null, new { @class = "text-danger", style = "color:red;" })
                             </td>
                         </tr>
@@ -274,7 +274,6 @@
                 <div id="CHEQUE">
                     <table class="details-table">
                         <tr>
-
                             <td>
                                 <strong>Bank Name <span style="color:red;">*</span></strong> :
                                 @Html.TextBoxFor(model => model.CHEQUEbankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
@@ -331,35 +330,6 @@
                         </tr>
                     </table>
                 </div>
-                @*<div id="UPI">
-                        <table class="details-table">
-                            <tr>
-                                <td>
-                                    <strong>Bank Name <span style="color:red;">*</span></strong> :
-                                    @Html.TextBoxFor(model => model.bankName, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
-                                    @Html.ValidationMessageFor(model => model.bankName, null, new { @class = "text-danger", style = "color:red;" })
-                                </td>
-                                <td>
-                                    <strong>Branch <span style="color:red;">*</span></strong> :
-                                    @Html.TextBoxFor(model => model.bankBranch, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
-                                    @Html.ValidationMessageFor(model => model.bankBranch, null, new { @class = "text-danger", style = "color:red;" })
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    <strong>UPI No <span style="color:red;">*</span></strong> :
-                                    @Html.TextBoxFor(model => model.UPINo, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
-                                    @Html.ValidationMessageFor(model => model.UPINo, null, new { @class = "text-danger", style = "color:red;" })
-                                </td>
-                                <td>
-                                    <strong>UPI Date <span style="color:red;">*</span></strong> :
-                                    @Html.TextBoxFor(model => model.UPIDate, new { @class = "form-control inputstyle", style = "height: 25px;border-radius: 4px;" })
-                                    @Html.ValidationMessageFor(model => model.UPIDate, null, new { @class = "text-danger", style = "color:red;" })
-                                </td>
-                            </tr>
-                        </table>
-                    </div>*@
                 <div id="demand-draft">
                     <table class="details-table">
                         <tr>
@@ -398,7 +368,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.min.js" integrity="sha512-zK+mEmgBJpVrlnQXcbEfs6Ao4e+ESmepuHso+2UpRwMJbfhPGYNxAZz+IqsiK6/hGn8S1nx1mFOVBoJXJGx8PQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.3/sweetalert2.css" integrity="sha512-TG239kA30BXeGpy+HpJei+qfJcKo8V9HKpe8UWuVdpk49NGUe86EDhmdXkCxMqD5gSlkLLi6YQ9SbNp+yRa9xQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <script>
     $(document).ready(function () {
             $('#submit').click(function (e) {
@@ -418,12 +387,14 @@
                 confirmButtonText: "Yes, Proceed"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var IPAddress = $('#IPAddress').val();
+                    var formData = $("form").serialize(); // Serialize form data, assuming the model is within a form
+                    var ipAddress = $('#IPAddress').val();
+                    formData += "&ipaddress=" + encodeURIComponent(ipAddress);
 
                     $.ajax({
                         url: '@Url.Action("CounterOnlinePayment")',
                         type: 'POST',
-                        data: { ipaddress: IPAddress },
+                        data: formData,
                         success: function (response) {
                             window.location.href = response.redirectUrl;
                         },
@@ -478,7 +449,7 @@
                                 Swal.fire({
                                     position: "center",
                                     icon: "error",
-                                    title: "Invalid redirect URL!",
+                                    title: "Fill Details Correctly !",
                                     showConfirmButton: false,
                                     timer: 2000
                                 });
@@ -509,7 +480,7 @@
     };</script>
 <script>
     function showPaymentDetails() {
-        var paymentModes = ['CARD', 'RTGS', 'CHEQUE', 'NEFTorIMPS', 'UPI'];
+        var paymentModes = ['CARD', 'RTGS', 'CHEQUE', 'NEFTorIMPS', 'demand-draft'];
 
         paymentModes.forEach(function (mode) {
             var element = document.getElementById(mode);

@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PMC_Sparrow_DataModelStoreContainer" CdmEntityContainer="PMC_Sparrow_DataEntities">
+    <EntitySetMapping Name="rit_citizenOTPCount">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.rit_citizenOTPCount">
+        <MappingFragment StoreEntitySet="rit_citizenOTPCount">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="citizen_mobile" ColumnName="citizen_mobile" />
+          <ScalarProperty Name="OTP" ColumnName="OTP" />
+          <ScalarProperty Name="last_submit_time" ColumnName="last_submit_time" />
+          <ScalarProperty Name="submit_attempts" ColumnName="submit_attempts" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_license_detail_temp">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_license_detail_temp">
+        <MappingFragment StoreEntitySet="tbl_license_detail_temp">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+          <ScalarProperty Name="entry_date" ColumnName="entry_date" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="sts" ColumnName="sts" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_license_details">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_license_details">
+        <MappingFragment StoreEntitySet="tbl_license_details">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="license_master_id" ColumnName="license_master_id" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="application_date" ColumnName="application_date" />
+          <ScalarProperty Name="no_of_employee" ColumnName="no_of_employee" />
+          <ScalarProperty Name="license_type_id" ColumnName="license_type_id" />
+          <ScalarProperty Name="level_remarks" ColumnName="level_remarks" />
+          <ScalarProperty Name="from_year" ColumnName="from_year" />
+          <ScalarProperty Name="issued_on" ColumnName="issued_on" />
+          <ScalarProperty Name="valid_upto" ColumnName="valid_upto" />
+          <ScalarProperty Name="approved_user_id" ColumnName="approved_user_id" />
+          <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="firm_type_id" ColumnName="firm_type_id" />
+          <ScalarProperty Name="apply_from" ColumnName="apply_from" />
+          <ScalarProperty Name="license_duration" ColumnName="license_duration" />
+          <ScalarProperty Name="applicant_categoty_type" ColumnName="applicant_categoty_type" />
+          <ScalarProperty Name="total_Price" ColumnName="total_Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_license_mail">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_license_mail">
+        <MappingFragment StoreEntitySet="tbl_license_mail">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="license_dtls_id" ColumnName="license_dtls_id" />
+          <ScalarProperty Name="from_userid" ColumnName="from_userid" />
+          <ScalarProperty Name="to_userid" ColumnName="to_userid" />
+          <ScalarProperty Name="stampdate" ColumnName="stampdate" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+          <ScalarProperty Name="action_date" ColumnName="action_date" />
+          <ScalarProperty Name="sign_status" ColumnName="sign_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_license_mstr">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_license_mstr">
+        <MappingFragment StoreEntitySet="tbl_license_mstr">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="license_no" ColumnName="license_no" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="father_name" ColumnName="father_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="bussiness_detail" ColumnName="bussiness_detail" />
+          <ScalarProperty Name="bussiness_address" ColumnName="bussiness_address" />
+          <ScalarProperty Name="occupancy_type_id" ColumnName="occupancy_type_id" />
+          <ScalarProperty Name="pan_no" ColumnName="pan_no" />
+          <ScalarProperty Name="voter_id_no" ColumnName="voter_id_no" />
+          <ScalarProperty Name="sales_tax_no" ColumnName="sales_tax_no" />
+          <ScalarProperty Name="holding_no" ColumnName="holding_no" />
+          <ScalarProperty Name="tin_no" ColumnName="tin_no" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="bussiness_name" ColumnName="bussiness_name" />
+          <ScalarProperty Name="buss_owner_name" ColumnName="buss_owner_name" />
+          <ScalarProperty Name="applicant_ward_id" ColumnName="applicant_ward_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ml_transaction_details">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_ml_transaction_details">
+        <MappingFragment StoreEntitySet="tbl_ml_transaction_details">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="transcation_mstr_id" ColumnName="transcation_mstr_id" />
+          <ScalarProperty Name="license_dtls_id" ColumnName="license_dtls_id" />
+          <ScalarProperty Name="cheque_no" ColumnName="cheque_no" />
+          <ScalarProperty Name="cheque_date" ColumnName="cheque_date" />
+          <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+          <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+          <ScalarProperty Name="card_no" ColumnName="card_no" />
+          <ScalarProperty Name="card_holder_name" ColumnName="card_holder_name" />
+          <ScalarProperty Name="card_type" ColumnName="card_type" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="cheque_status" ColumnName="cheque_status" />
+          <ScalarProperty Name="reconcile_date" ColumnName="reconcile_date" />
+          <ScalarProperty Name="cleared_by" ColumnName="cleared_by" />
+          <ScalarProperty Name="cleared_date" ColumnName="cleared_date" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_trade_reciept">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_trade_reciept">
+        <MappingFragment StoreEntitySet="tbl_trade_reciept">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+          <ScalarProperty Name="license_dtls_id" ColumnName="license_dtls_id" />
+          <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+          <ScalarProperty Name="ref_no" ColumnName="ref_no" />
+          <ScalarProperty Name="ref_date" ColumnName="ref_date" />
+          <ScalarProperty Name="receipt_no" ColumnName="receipt_no" />
+          <ScalarProperty Name="payment_mode" ColumnName="payment_mode" />
+          <ScalarProperty Name="receipt_date" ColumnName="receipt_date" />
+          <ScalarProperty Name="owner" ColumnName="owner" />
+          <ScalarProperty Name="gaurdian_name" ColumnName="gaurdian_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="arrear_amount" ColumnName="arrear_amount" />
+          <ScalarProperty Name="current_amount" ColumnName="current_amount" />
+          <ScalarProperty Name="total_recieved_amount" ColumnName="total_recieved_amount" />
+          <ScalarProperty Name="total_payable_amount" ColumnName="total_payable_amount" />
+          <ScalarProperty Name="from_year" ColumnName="from_year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_transaction_master">
+      <EntityTypeMapping TypeName="PMC_Sparrow_DataModel.tbl_transaction_master">
+        <MappingFragment StoreEntitySet="tbl_transaction_master">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="license_dtls_id" ColumnName="license_dtls_id" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="transaction_no" ColumnName="transaction_no" />
+          <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+          <ScalarProperty Name="penalty_amt" ColumnName="penalty_amt" />
+          <ScalarProperty Name="fee_amt" ColumnName="fee_amt" />
+          <ScalarProperty Name="payable_amt" ColumnName="payable_amt" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="payment_mode" ColumnName="payment_mode" />
+          <ScalarProperty Name="cancel_status" ColumnName="cancel_status" />
+          <ScalarProperty Name="cash_verify_id" ColumnName="cash_verify_id" />
+          <ScalarProperty Name="cash_verify_date" ColumnName="cash_verify_date" />
+          <ScalarProperty Name="cash_verify_status" ColumnName="cash_verify_status" />
+          <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="arrear_amount" ColumnName="arrear_amount" />
+          <ScalarProperty Name="from_year" ColumnName="from_year" />
+          <ScalarProperty Name="to_year" ColumnName="to_year" />
+          <ScalarProperty Name="form_verify_id" ColumnName="form_verify_id" />
+          <ScalarProperty Name="form_verify_date" ColumnName="form_verify_date" />
+          <ScalarProperty Name="form_verify_status" ColumnName="form_verify_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="rit_checkCustomerdocument" FunctionName="PMC_Sparrow_DataModel.Store.rit_checkCustomerdocument" />
+    <FunctionImportMapping FunctionImportName="rit_checkForOTP" FunctionName="PMC_Sparrow_DataModel.Store.rit_checkForOTP" />
+    <FunctionImportMapping FunctionImportName="rit_ConsumerLicenseApplication" FunctionName="PMC_Sparrow_DataModel.Store.rit_ConsumerLicenseApplication" />
+    <FunctionImportMapping FunctionImportName="rit_ConsumerMobile" FunctionName="PMC_Sparrow_DataModel.Store.rit_ConsumerMobile" />
+    <FunctionImportMapping FunctionImportName="rit_ConsumerRequestSave" FunctionName="PMC_Sparrow_DataModel.Store.rit_ConsumerRequestSave" />
+    <FunctionImportMapping FunctionImportName="rit_CounterLicenseApplication" FunctionName="PMC_Sparrow_DataModel.Store.rit_CounterLicenseApplication" />
+    <FunctionImportMapping FunctionImportName="rit_fetchConsumer" FunctionName="PMC_Sparrow_DataModel.Store.rit_fetchConsumer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_fetchConsumer_Result">
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="holding_no" ColumnName="holding_no" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_fetchConsumerdetail" FunctionName="PMC_Sparrow_DataModel.Store.rit_fetchConsumerdetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_fetchConsumerdetail_Result">
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getBussinessAddressWard" FunctionName="PMC_Sparrow_DataModel.Store.rit_getBussinessAddressWard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getBussinessAddressWard_Result">
+          <ScalarProperty Name="ward_no" ColumnName="ward_no" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getConsumerData" FunctionName="PMC_Sparrow_DataModel.Store.rit_getConsumerData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getConsumerData_Result">
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="bussiness_address" ColumnName="bussiness_address" />
+          <ScalarProperty Name="circle" ColumnName="circle" />
+          <ScalarProperty Name="buss_owner_name" ColumnName="buss_owner_name" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="holding_no" ColumnName="holding_no" />
+          <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="total_Price" ColumnName="total_Price" />
+          <ScalarProperty Name="Is_Near_Expiry" ColumnName="Is_Near_Expiry" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getConsumernamob" FunctionName="PMC_Sparrow_DataModel.Store.rit_getConsumernamob">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getConsumernamob_Result">
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getConsumerPaymentForm" FunctionName="PMC_Sparrow_DataModel.Store.rit_getConsumerPaymentForm">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getConsumerPaymentForm_Result">
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="bussiness_address" ColumnName="bussiness_address" />
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="BussinessType1" ColumnName="BussinessType1" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="total_Price" ColumnName="total_Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getConsumerPaymentReceipt" FunctionName="PMC_Sparrow_DataModel.Store.rit_getConsumerPaymentReceipt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getConsumerPaymentReceipt_Result">
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="receipt_no" ColumnName="receipt_no" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="total_payable_amount" ColumnName="total_payable_amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getCounterPaymentForm" FunctionName="PMC_Sparrow_DataModel.Store.rit_getCounterPaymentForm">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getCounterPaymentForm_Result">
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="bussiness_address" ColumnName="bussiness_address" />
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="BussinessType1" ColumnName="BussinessType1" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="total_Price" ColumnName="total_Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getCounterPaymentReceipt" FunctionName="PMC_Sparrow_DataModel.Store.rit_getCounterPaymentReceipt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_getCounterPaymentReceipt_Result">
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="consumer_name1" ColumnName="consumer_name1" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="receipt_no" ColumnName="receipt_no" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="total_payable_amount" ColumnName="total_payable_amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_getDesignation" FunctionName="PMC_Sparrow_DataModel.Store.rit_getDesignation" />
+    <FunctionImportMapping FunctionImportName="rit_getName" FunctionName="PMC_Sparrow_DataModel.Store.rit_getName" />
+    <FunctionImportMapping FunctionImportName="rit_getRateAccBusiness" FunctionName="PMC_Sparrow_DataModel.Store.rit_getRateAccBusiness" />
+    <FunctionImportMapping FunctionImportName="rit_getTotalRate" FunctionName="PMC_Sparrow_DataModel.Store.rit_getTotalRate" />
+    <FunctionImportMapping FunctionImportName="rit_SaveAgainConsumerLicenseApplication" FunctionName="PMC_Sparrow_DataModel.Store.rit_SaveAgainConsumerLicenseApplication" />
+    <FunctionImportMapping FunctionImportName="rit_saveConsumerRequest" FunctionName="PMC_Sparrow_DataModel.Store.rit_saveConsumerRequest">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_saveConsumerRequest_Result">
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="holding_no" ColumnName="holding_no" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_saveCounterCustomerdocument" FunctionName="PMC_Sparrow_DataModel.Store.rit_saveCounterCustomerdocument" />
+    <FunctionImportMapping FunctionImportName="rit_saveCounterdata" FunctionName="PMC_Sparrow_DataModel.Store.rit_saveCounterdata" />
+    <FunctionImportMapping FunctionImportName="rit_saveCounterPaymentSuccess" FunctionName="PMC_Sparrow_DataModel.Store.rit_saveCounterPaymentSuccess" />
+    <FunctionImportMapping FunctionImportName="rit_saveCustomerdocument" FunctionName="PMC_Sparrow_DataModel.Store.rit_saveCustomerdocument" />
+    <FunctionImportMapping FunctionImportName="rit_savePaymentFailure" FunctionName="PMC_Sparrow_DataModel.Store.rit_savePaymentFailure" />
+    <FunctionImportMapping FunctionImportName="rit_savePaymentSuccess" FunctionName="PMC_Sparrow_DataModel.Store.rit_savePaymentSuccess" />
+    <FunctionImportMapping FunctionImportName="rit_SelectBusinessPremises" FunctionName="PMC_Sparrow_DataModel.Store.rit_SelectBusinessPremises">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_SelectBusinessPremises_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="bussiness_size" ColumnName="bussiness_size" />
+          <ScalarProperty Name="rate" ColumnName="rate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_SelectBusinessPremisesOwner" FunctionName="PMC_Sparrow_DataModel.Store.rit_SelectBusinessPremisesOwner">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_SelectBusinessPremisesOwner_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="occupency_type" ColumnName="occupency_type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_SelectCategory" FunctionName="PMC_Sparrow_DataModel.Store.rit_SelectCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_SelectCategory_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_SelectFirmType" FunctionName="PMC_Sparrow_DataModel.Store.rit_SelectFirmType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_SelectFirmType_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firm_type" ColumnName="firm_type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_SelectLisenceYear" FunctionName="PMC_Sparrow_DataModel.Store.rit_SelectLisenceYear">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_SelectLisenceYear_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="license_year" ColumnName="license_year" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_Selectwardno" FunctionName="PMC_Sparrow_DataModel.Store.rit_Selectwardno">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_Selectwardno_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ward_no" ColumnName="ward_no" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rit_UpdateConsumerLicenseApplication" FunctionName="PMC_Sparrow_DataModel.Store.rit_UpdateConsumerLicenseApplication">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.rit_UpdateConsumerLicenseApplication_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ulb_id" ColumnName="ulb_id" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="license_no" ColumnName="license_no" />
+          <ScalarProperty Name="doe" ColumnName="doe" />
+          <ScalarProperty Name="consumer_name" ColumnName="consumer_name" />
+          <ScalarProperty Name="father_name" ColumnName="father_name" />
+          <ScalarProperty Name="mobile_no" ColumnName="mobile_no" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="firm_name" ColumnName="firm_name" />
+          <ScalarProperty Name="bussiness_detail" ColumnName="bussiness_detail" />
+          <ScalarProperty Name="bussiness_address" ColumnName="bussiness_address" />
+          <ScalarProperty Name="occupancy_type_id" ColumnName="occupancy_type_id" />
+          <ScalarProperty Name="pan_no" ColumnName="pan_no" />
+          <ScalarProperty Name="voter_id_no" ColumnName="voter_id_no" />
+          <ScalarProperty Name="sales_tax_no" ColumnName="sales_tax_no" />
+          <ScalarProperty Name="holding_no" ColumnName="holding_no" />
+          <ScalarProperty Name="tin_no" ColumnName="tin_no" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="bussiness_name" ColumnName="bussiness_name" />
+          <ScalarProperty Name="buss_owner_name" ColumnName="buss_owner_name" />
+          <ScalarProperty Name="applicant_ward_id" ColumnName="applicant_ward_id" />
+          <ScalarProperty Name="id1" ColumnName="id1" />
+          <ScalarProperty Name="license_master_id" ColumnName="license_master_id" />
+          <ScalarProperty Name="ulb_id1" ColumnName="ulb_id1" />
+          <ScalarProperty Name="application_no" ColumnName="application_no" />
+          <ScalarProperty Name="application_date" ColumnName="application_date" />
+          <ScalarProperty Name="no_of_employee" ColumnName="no_of_employee" />
+          <ScalarProperty Name="license_type_id" ColumnName="license_type_id" />
+          <ScalarProperty Name="level_remarks" ColumnName="level_remarks" />
+          <ScalarProperty Name="from_year" ColumnName="from_year" />
+          <ScalarProperty Name="issued_on" ColumnName="issued_on" />
+          <ScalarProperty Name="valid_upto" ColumnName="valid_upto" />
+          <ScalarProperty Name="approved_user_id" ColumnName="approved_user_id" />
+          <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+          <ScalarProperty Name="timestamp1" ColumnName="timestamp1" />
+          <ScalarProperty Name="user_id1" ColumnName="user_id1" />
+          <ScalarProperty Name="status1" ColumnName="status1" />
+          <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+          <ScalarProperty Name="sqare_feet" ColumnName="sqare_feet" />
+          <ScalarProperty Name="firm_type_id" ColumnName="firm_type_id" />
+          <ScalarProperty Name="apply_from" ColumnName="apply_from" />
+          <ScalarProperty Name="license_duration" ColumnName="license_duration" />
+          <ScalarProperty Name="applicant_categoty_type" ColumnName="applicant_categoty_type" />
+          <ScalarProperty Name="total_Price" ColumnName="total_Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectBusinessPremises" FunctionName="PMC_Sparrow_DataModel.Store.SelectBusinessPremises">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.SelectBusinessPremises_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="bussiness_size" ColumnName="bussiness_size" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SelectCategory" FunctionName="PMC_Sparrow_DataModel.Store.SelectCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.SelectCategory_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="TaxCal" FunctionName="PMC_Sparrow_DataModel.Store.TaxCal">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PMC_Sparrow_DataModel.TaxCal_Result">
+          <ScalarProperty Name="arvMasterID" ColumnName="arvMasterID" />
+          <ScalarProperty Name="Factor" ColumnName="Factor" />
+          <ScalarProperty Name="UnitAreaRate" ColumnName="UnitAreaRate" />
+          <ScalarProperty Name="HoldingTax" ColumnName="HoldingTax" />
+          <ScalarProperty Name="govMultipicationFactor" ColumnName="govMultipicationFactor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateCurrentPaymentReceipt" FunctionName="PMC_Sparrow_DataModel.Store.UpdateCurrentPaymentReceipt" />
+    <FunctionImportMapping FunctionImportName="UpdatePaymentReceipt" FunctionName="PMC_Sparrow_DataModel.Store.UpdatePaymentReceipt" />
+  </EntityContainerMapping>
+</Mapping>

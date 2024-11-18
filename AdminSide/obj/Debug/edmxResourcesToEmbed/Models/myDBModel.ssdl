@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMC_Sparrow_DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="rit_citizenOTPCount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="citizen_mobile" Type="bigint" />
+    <Property Name="OTP" Type="int" />
+    <Property Name="last_submit_time" Type="datetime" />
+    <Property Name="submit_attempts" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_license_detail_temp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="owner_name" Type="varchar" MaxLength="500" />
+    <Property Name="mobile_no" Type="bigint" />
+    <Property Name="ip_address" Type="varchar" MaxLength="100" />
+    <Property Name="entry_date" Type="datetime" />
+    <Property Name="ulb_id" Type="int" />
+    <Property Name="sts" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_license_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="license_master_id" Type="bigint" Nullable="false" />
+    <Property Name="ulb_id" Type="int" Nullable="false" />
+    <Property Name="application_no" Type="varchar" MaxLength="100" />
+    <Property Name="application_date" Type="date" />
+    <Property Name="no_of_employee" Type="int" />
+    <Property Name="license_type_id" Type="int" />
+    <Property Name="level_remarks" Type="varchar" MaxLength="500" />
+    <Property Name="from_year" Type="date" />
+    <Property Name="issued_on" Type="date" />
+    <Property Name="valid_upto" Type="date" />
+    <Property Name="approved_user_id" Type="bigint" />
+    <Property Name="approved_date" Type="date" />
+    <Property Name="timestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="status" Type="int" />
+    <Property Name="payment_status" Type="int" />
+    <Property Name="sqare_feet" Type="varchar" MaxLength="20" />
+    <Property Name="firm_type_id" Type="bigint" />
+    <Property Name="apply_from" Type="varchar" MaxLength="20" />
+    <Property Name="license_duration" Type="int" />
+    <Property Name="applicant_categoty_type" Type="varchar" MaxLength="5" />
+    <Property Name="total_Price" Type="decimal" Precision="20" Scale="2" />
+  </EntityType>
+  <EntityType Name="tbl_license_mail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="license_dtls_id" Type="bigint" />
+    <Property Name="from_userid" Type="bigint" />
+    <Property Name="to_userid" Type="bigint" />
+    <Property Name="stampdate" Type="date" />
+    <Property Name="remarks" Type="varchar" MaxLength="500" />
+    <Property Name="status" Type="bigint" />
+    <Property Name="user_id" Type="bigint" />
+    <Property Name="ip_address" Type="varchar" MaxLength="200" />
+    <Property Name="action_date" Type="date" />
+    <Property Name="sign_status" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_license_mstr">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ulb_id" Type="bigint" Nullable="false" />
+    <Property Name="ward_id" Type="bigint" Nullable="false" />
+    <Property Name="license_no" Type="varchar" MaxLength="100" />
+    <Property Name="doe" Type="date" Nullable="false" />
+    <Property Name="consumer_name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="father_name" Type="varchar" MaxLength="200" />
+    <Property Name="mobile_no" Type="bigint" />
+    <Property Name="email_id" Type="varchar" MaxLength="200" />
+    <Property Name="address" Type="varchar(max)" />
+    <Property Name="firm_name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="bussiness_detail" Type="varchar" MaxLength="400" />
+    <Property Name="bussiness_address" Type="varchar" MaxLength="200" />
+    <Property Name="occupancy_type_id" Type="bigint" />
+    <Property Name="pan_no" Type="varchar" MaxLength="50" />
+    <Property Name="voter_id_no" Type="varchar" MaxLength="15" />
+    <Property Name="sales_tax_no" Type="varchar" MaxLength="50" />
+    <Property Name="holding_no" Type="varchar" MaxLength="200" />
+    <Property Name="tin_no" Type="varchar" MaxLength="50" />
+    <Property Name="timestamp" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="15" />
+    <Property Name="bussiness_name" Type="int" />
+    <Property Name="buss_owner_name" Type="varchar" MaxLength="400" />
+    <Property Name="applicant_ward_id" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_ml_transaction_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="transcation_mstr_id" Type="bigint" Nullable="false" />
+    <Property Name="license_dtls_id" Type="bigint" Nullable="false" />
+    <Property Name="cheque_no" Type="varchar" MaxLength="50" />
+    <Property Name="cheque_date" Type="date" />
+    <Property Name="branch_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bank_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="card_no" Type="bigint" />
+    <Property Name="card_holder_name" Type="varchar" MaxLength="80" />
+    <Property Name="card_type" Type="varchar" MaxLength="30" />
+    <Property Name="amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="cheque_status" Type="varchar" MaxLength="30" />
+    <Property Name="reconcile_date" Type="date" />
+    <Property Name="cleared_by" Type="varchar" MaxLength="50" />
+    <Property Name="cleared_date" Type="date" />
+    <Property Name="remarks" Type="varchar" MaxLength="400" />
+    <Property Name="ulb_id" Type="int" />
+    <Property Name="ip_address" Type="varchar" MaxLength="50" />
+    <Property Name="user_id" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tbl_trade_reciept">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="transaction_id" Type="bigint" />
+    <Property Name="license_dtls_id" Type="bigint" />
+    <Property Name="bank_name" Type="varchar" MaxLength="100" />
+    <Property Name="ref_no" Type="varchar" MaxLength="100" />
+    <Property Name="ref_date" Type="date" />
+    <Property Name="receipt_no" Type="varchar" MaxLength="80" />
+    <Property Name="payment_mode" Type="varchar" MaxLength="80" />
+    <Property Name="receipt_date" Type="date" />
+    <Property Name="owner" Type="varchar" MaxLength="100" />
+    <Property Name="gaurdian_name" Type="varchar" MaxLength="100" />
+    <Property Name="mobile_no" Type="varchar" MaxLength="90" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="arrear_amount" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="current_amount" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="total_recieved_amount" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="total_payable_amount" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="from_year" Type="date" />
+  </EntityType>
+  <EntityType Name="tbl_transaction_master">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="license_dtls_id" Type="bigint" />
+    <Property Name="ulb_id" Type="bigint" Nullable="false" />
+    <Property Name="ward_id" Type="bigint" Nullable="false" />
+    <Property Name="transaction_no" Type="varchar" MaxLength="500" />
+    <Property Name="transaction_date" Type="date" Nullable="false" />
+    <Property Name="penalty_amt" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="fee_amt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="payable_amt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="remarks" Type="varchar" MaxLength="400" />
+    <Property Name="payment_mode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cancel_status" Type="int" />
+    <Property Name="cash_verify_id" Type="bigint" />
+    <Property Name="cash_verify_date" Type="date" />
+    <Property Name="cash_verify_status" Type="varchar" MaxLength="20" />
+    <Property Name="ip_address" Type="varchar" MaxLength="50" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="timestamp" Type="datetime" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="10" />
+    <Property Name="arrear_amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="from_year" Type="date" />
+    <Property Name="to_year" Type="date" />
+    <Property Name="form_verify_id" Type="int" />
+    <Property Name="form_verify_date" Type="datetime" />
+    <Property Name="form_verify_status" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__tbl_licen__licen__02FC7413">
+    <End Role="tbl_license_mstr" Type="Self.tbl_license_mstr" Multiplicity="1" />
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_mstr">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_license_details">
+        <PropertyRef Name="license_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_licen__licen__2116E6DF">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="0..1" />
+    <End Role="tbl_license_mail" Type="Self.tbl_license_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_license_mail">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__licen__151B244E">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="0..1" />
+    <End Role="tbl_transaction_master" Type="Self.tbl_transaction_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_transaction_master">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__licen__65370702">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="1" />
+    <End Role="tbl_ml_transaction_details" Type="Self.tbl_ml_transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_ml_transaction_details">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__trans__6442E2C9">
+    <End Role="tbl_transaction_master" Type="Self.tbl_transaction_master" Multiplicity="1" />
+    <End Role="tbl_ml_transaction_details" Type="Self.tbl_ml_transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_transaction_master">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_ml_transaction_details">
+        <PropertyRef Name="transcation_mstr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="rit_checkCustomerdocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNumber" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_checkForOTP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="designation" Type="varchar" Mode="In" />
+    <Parameter Name="phone" Type="varchar" Mode="In" />
+    <Parameter Name="ipaddress" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_ConsumerLicenseApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="occupancy_type_id" Type="varchar" Mode="In" />
+    <Parameter Name="mobile_no" Type="varchar" Mode="In" />
+    <Parameter Name="firm_name" Type="varchar" Mode="In" />
+    <Parameter Name="consumer_Name" Type="varchar" Mode="In" />
+    <Parameter Name="father_name" Type="varchar" Mode="In" />
+    <Parameter Name="email_id" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar(max)" Mode="In" />
+    <Parameter Name="firm_type" Type="varchar" Mode="In" />
+    <Parameter Name="buss_owner_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="business_detail" Type="varchar(max)" Mode="In" />
+    <Parameter Name="holding_no" Type="varchar" Mode="In" />
+    <Parameter Name="sales_tax_no" Type="varchar" Mode="In" />
+    <Parameter Name="Businessward_id" Type="int" Mode="In" />
+    <Parameter Name="business_address" Type="varchar" Mode="In" />
+    <Parameter Name="DOE" Type="date" Mode="In" />
+    <Parameter Name="tin_no" Type="varchar" Mode="In" />
+    <Parameter Name="pan_no" Type="varchar" Mode="In" />
+    <Parameter Name="voter_id_no" Type="varchar" Mode="In" />
+    <Parameter Name="business_name" Type="int" Mode="In" />
+    <Parameter Name="BusinessSize" Type="varchar" Mode="In" />
+    <Parameter Name="license_duration" Type="int" Mode="In" />
+    <Parameter Name="total_Price" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="rit_ConsumerMobile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Mobile" Type="varchar" Mode="In" />
+    <Parameter Name="ConsumerName" Type="varchar" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_ConsumerRequestSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="PropertyNo" Type="varchar" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_CounterLicenseApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="occupancy_type_id" Type="varchar" Mode="In" />
+    <Parameter Name="mobile_no" Type="varchar" Mode="In" />
+    <Parameter Name="firm_name" Type="varchar" Mode="In" />
+    <Parameter Name="consumer_Name" Type="varchar" Mode="In" />
+    <Parameter Name="firm_type" Type="varchar" Mode="In" />
+    <Parameter Name="holding_no" Type="varchar" Mode="In" />
+    <Parameter Name="Businessward_id" Type="int" Mode="In" />
+    <Parameter Name="business_address" Type="varchar" Mode="In" />
+    <Parameter Name="DOE" Type="date" Mode="In" />
+    <Parameter Name="business_name" Type="int" Mode="In" />
+    <Parameter Name="BusinessSize" Type="varchar" Mode="In" />
+    <Parameter Name="license_duration" Type="int" Mode="In" />
+    <Parameter Name="total_Price" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="rit_fetchConsumer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_fetchConsumerdetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_getBussinessAddressWard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="rit_getConsumerData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getConsumernamob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobile" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getConsumerPaymentForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getConsumerPaymentReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getCounterPaymentForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getCounterPaymentReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getDesignation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_getName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNumber" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="rit_getRateAccBusiness" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CategoryID" Type="int" Mode="In" />
+    <Parameter Name="businessSize" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="rit_getTotalRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="License_Year" Type="int" Mode="In" />
+    <Parameter Name="bussiness_size" Type="decimal" Mode="In" />
+    <Parameter Name="CategoryID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="rit_SaveAgainConsumerLicenseApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="occupancy_type_id" Type="varchar" Mode="In" />
+    <Parameter Name="mobile_no" Type="varchar" Mode="In" />
+    <Parameter Name="firm_name" Type="varchar" Mode="In" />
+    <Parameter Name="consumer_Name" Type="varchar" Mode="In" />
+    <Parameter Name="father_name" Type="varchar" Mode="In" />
+    <Parameter Name="email_id" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar(max)" Mode="In" />
+    <Parameter Name="firm_type" Type="varchar" Mode="In" />
+    <Parameter Name="buss_owner_name" Type="varchar(max)" Mode="In" />
+    <Parameter Name="business_detail" Type="varchar(max)" Mode="In" />
+    <Parameter Name="holding_no" Type="varchar" Mode="In" />
+    <Parameter Name="sales_tax_no" Type="varchar" Mode="In" />
+    <Parameter Name="Businessward_id" Type="int" Mode="In" />
+    <Parameter Name="business_address" Type="varchar" Mode="In" />
+    <Parameter Name="DOE" Type="date" Mode="In" />
+    <Parameter Name="tin_no" Type="varchar" Mode="In" />
+    <Parameter Name="pan_no" Type="varchar" Mode="In" />
+    <Parameter Name="voter_id_no" Type="varchar" Mode="In" />
+    <Parameter Name="business_name" Type="int" Mode="In" />
+    <Parameter Name="BusinessSize" Type="varchar" Mode="In" />
+    <Parameter Name="license_duration" Type="int" Mode="In" />
+    <Parameter Name="total_Price" Type="decimal" Mode="In" />
+    <Parameter Name="application_no" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_saveConsumerRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mobileNo" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_saveCounterCustomerdocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isMandatory" Type="char" Mode="In" />
+    <Parameter Name="documentType" Type="varchar" Mode="In" />
+    <Parameter Name="fileName" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNumber" Type="varchar" Mode="In" />
+    <Parameter Name="ip_address" Type="varchar" Mode="In" />
+    <Parameter Name="doc_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_saveCounterdata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+    <Parameter Name="totalPrice" Type="decimal" Mode="In" />
+    <Parameter Name="fullName" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+    <Parameter Name="application_no" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_saveCounterPaymentSuccess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+    <Parameter Name="totalPrice" Type="decimal" Mode="In" />
+    <Parameter Name="remarks" Type="varchar(max)" Mode="In" />
+    <Parameter Name="paymentMode" Type="varchar" Mode="In" />
+    <Parameter Name="bank_name" Type="varchar" Mode="In" />
+    <Parameter Name="branch_name" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+    <Parameter Name="application_no" Type="varchar" Mode="In" />
+    <Parameter Name="cheque_no" Type="varchar" Mode="In" />
+    <Parameter Name="cheque_date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="rit_saveCustomerdocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="isMandatory" Type="char" Mode="In" />
+    <Parameter Name="documentType" Type="varchar" Mode="In" />
+    <Parameter Name="fileName" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNumber" Type="varchar" Mode="In" />
+    <Parameter Name="ip_address" Type="varchar" Mode="In" />
+    <Parameter Name="doc_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_savePaymentFailure" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="razorpay_order_id" Type="varchar" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+    <Parameter Name="totalPrice" Type="decimal" Mode="In" />
+    <Parameter Name="fullName" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_savePaymentSuccess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="razorpay_order_id" Type="varchar" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
+    <Parameter Name="totalPrice" Type="decimal" Mode="In" />
+    <Parameter Name="fullName" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+    <Parameter Name="application_no" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="rit_SelectBusinessPremises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_SelectBusinessPremisesOwner" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_SelectCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_SelectFirmType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_SelectLisenceYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_Selectwardno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="rit_UpdateConsumerLicenseApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="application_no" Type="varchar" Mode="In" />
+    <Parameter Name="mobileNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="SelectBusinessPremises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SelectCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TaxCal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AY" Type="date" Mode="In" />
+    <Parameter Name="occupancyTypeID" Type="int" Mode="In" />
+    <Parameter Name="streetTypeID" Type="int" Mode="In" />
+    <Parameter Name="useTypeID" Type="int" Mode="In" />
+    <Parameter Name="constructionTypeID" Type="int" Mode="In" />
+    <Parameter Name="usageTypeID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateCurrentPaymentReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="SAS" Type="nvarchar" Mode="In" />
+    <Parameter Name="postingdate" Type="nvarchar" Mode="In" />
+    <Parameter Name="PAYMENTMODE" Type="nvarchar" Mode="In" />
+    <Parameter Name="paymentdate" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdatePaymentReceipt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pid" Type="int" Mode="In" />
+    <Parameter Name="RECEIPT_DATE" Type="varchar" Mode="In" />
+    <Parameter Name="PAYMENTMODE" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="PMC_Sparrow_DataModelStoreContainer">
+    <EntitySet Name="rit_citizenOTPCount" EntityType="Self.rit_citizenOTPCount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_license_detail_temp" EntityType="Self.tbl_license_detail_temp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_license_details" EntityType="Self.tbl_license_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_license_mail" EntityType="Self.tbl_license_mail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_license_mstr" EntityType="Self.tbl_license_mstr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_ml_transaction_details" EntityType="Self.tbl_ml_transaction_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_trade_reciept" EntityType="Self.tbl_trade_reciept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_transaction_master" EntityType="Self.tbl_transaction_master" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tbl_licen__licen__02FC7413" Association="Self.FK__tbl_licen__licen__02FC7413">
+      <End Role="tbl_license_mstr" EntitySet="tbl_license_mstr" />
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_licen__licen__2116E6DF" Association="Self.FK__tbl_licen__licen__2116E6DF">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_license_mail" EntitySet="tbl_license_mail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__licen__151B244E" Association="Self.FK__tbl_trans__licen__151B244E">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_transaction_master" EntitySet="tbl_transaction_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__licen__65370702" Association="Self.FK__tbl_trans__licen__65370702">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_ml_transaction_details" EntitySet="tbl_ml_transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__trans__6442E2C9" Association="Self.FK__tbl_trans__trans__6442E2C9">
+      <End Role="tbl_transaction_master" EntitySet="tbl_transaction_master" />
+      <End Role="tbl_ml_transaction_details" EntitySet="tbl_ml_transaction_details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMC_Sparrow_DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="rit_citizenOTPCount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="citizen_mobile" Type="Int64" />
+    <Property Name="OTP" Type="Int32" />
+    <Property Name="last_submit_time" Type="DateTime" Precision="3" />
+    <Property Name="submit_attempts" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_license_detail_temp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="owner_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="mobile_no" Type="Int64" />
+    <Property Name="ip_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="entry_date" Type="DateTime" Precision="3" />
+    <Property Name="ulb_id" Type="Int32" />
+    <Property Name="sts" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_license_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="license_master_id" Type="Int64" Nullable="false" />
+    <Property Name="ulb_id" Type="Int32" Nullable="false" />
+    <Property Name="application_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="application_date" Type="DateTime" Precision="0" />
+    <Property Name="no_of_employee" Type="Int32" />
+    <Property Name="license_type_id" Type="Int32" />
+    <Property Name="level_remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="from_year" Type="DateTime" Precision="0" />
+    <Property Name="issued_on" Type="DateTime" Precision="0" />
+    <Property Name="valid_upto" Type="DateTime" Precision="0" />
+    <Property Name="approved_user_id" Type="Int64" />
+    <Property Name="approved_date" Type="DateTime" Precision="0" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="payment_status" Type="Int32" />
+    <Property Name="sqare_feet" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="firm_type_id" Type="Int64" />
+    <Property Name="apply_from" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="license_duration" Type="Int32" />
+    <Property Name="applicant_categoty_type" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="total_Price" Type="Decimal" Precision="20" Scale="2" />
+    <NavigationProperty Name="tbl_license_mstr" Relationship="Self.FK__tbl_licen__licen__02FC7413" FromRole="tbl_license_details" ToRole="tbl_license_mstr" />
+    <NavigationProperty Name="tbl_license_mail" Relationship="Self.FK__tbl_licen__licen__2116E6DF" FromRole="tbl_license_details" ToRole="tbl_license_mail" />
+    <NavigationProperty Name="tbl_transaction_master" Relationship="Self.FK__tbl_trans__licen__151B244E" FromRole="tbl_license_details" ToRole="tbl_transaction_master" />
+    <NavigationProperty Name="tbl_ml_transaction_details" Relationship="Self.FK__tbl_trans__licen__65370702" FromRole="tbl_license_details" ToRole="tbl_ml_transaction_details" />
+  </EntityType>
+  <EntityType Name="tbl_license_mail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="license_dtls_id" Type="Int64" />
+    <Property Name="from_userid" Type="Int64" />
+    <Property Name="to_userid" Type="Int64" />
+    <Property Name="stampdate" Type="DateTime" Precision="0" />
+    <Property Name="remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Int64" />
+    <Property Name="user_id" Type="Int64" />
+    <Property Name="ip_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="action_date" Type="DateTime" Precision="0" />
+    <Property Name="sign_status" Type="Int32" />
+    <NavigationProperty Name="tbl_license_details" Relationship="Self.FK__tbl_licen__licen__2116E6DF" FromRole="tbl_license_mail" ToRole="tbl_license_details" />
+  </EntityType>
+  <EntityType Name="tbl_license_mstr">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ulb_id" Type="Int64" Nullable="false" />
+    <Property Name="ward_id" Type="Int64" Nullable="false" />
+    <Property Name="license_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="doe" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="consumer_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="father_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="mobile_no" Type="Int64" />
+    <Property Name="email_id" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="firm_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bussiness_detail" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="bussiness_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="occupancy_type_id" Type="Int64" />
+    <Property Name="pan_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="voter_id_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="sales_tax_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="holding_no" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="tin_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="bussiness_name" Type="Int32" />
+    <Property Name="buss_owner_name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="applicant_ward_id" Type="Int32" />
+    <NavigationProperty Name="tbl_license_details" Relationship="Self.FK__tbl_licen__licen__02FC7413" FromRole="tbl_license_mstr" ToRole="tbl_license_details" />
+  </EntityType>
+  <EntityType Name="tbl_ml_transaction_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="transcation_mstr_id" Type="Int64" Nullable="false" />
+    <Property Name="license_dtls_id" Type="Int64" Nullable="false" />
+    <Property Name="cheque_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cheque_date" Type="DateTime" Precision="0" />
+    <Property Name="branch_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bank_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="card_no" Type="Int64" />
+    <Property Name="card_holder_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="card_type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="cheque_status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="reconcile_date" Type="DateTime" Precision="0" />
+    <Property Name="cleared_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cleared_date" Type="DateTime" Precision="0" />
+    <Property Name="remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="ulb_id" Type="Int32" />
+    <Property Name="ip_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_id" Type="Int64" />
+    <NavigationProperty Name="tbl_license_details" Relationship="Self.FK__tbl_trans__licen__65370702" FromRole="tbl_ml_transaction_details" ToRole="tbl_license_details" />
+    <NavigationProperty Name="tbl_transaction_master" Relationship="Self.FK__tbl_trans__trans__6442E2C9" FromRole="tbl_ml_transaction_details" ToRole="tbl_transaction_master" />
+  </EntityType>
+  <EntityType Name="tbl_trade_reciept">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="transaction_id" Type="Int64" />
+    <Property Name="license_dtls_id" Type="Int64" />
+    <Property Name="bank_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ref_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ref_date" Type="DateTime" Precision="0" />
+    <Property Name="receipt_no" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="payment_mode" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="receipt_date" Type="DateTime" Precision="0" />
+    <Property Name="owner" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="gaurdian_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mobile_no" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="arrear_amount" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="current_amount" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="total_recieved_amount" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="total_payable_amount" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="from_year" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tbl_transaction_master">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="license_dtls_id" Type="Int64" />
+    <Property Name="ulb_id" Type="Int64" Nullable="false" />
+    <Property Name="ward_id" Type="Int64" Nullable="false" />
+    <Property Name="transaction_no" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="transaction_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="penalty_amt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="fee_amt" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="payable_amt" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="remarks" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="payment_mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cancel_status" Type="Int32" />
+    <Property Name="cash_verify_id" Type="Int64" />
+    <Property Name="cash_verify_date" Type="DateTime" Precision="0" />
+    <Property Name="cash_verify_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ip_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="arrear_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="from_year" Type="DateTime" Precision="0" />
+    <Property Name="to_year" Type="DateTime" Precision="0" />
+    <Property Name="form_verify_id" Type="Int32" />
+    <Property Name="form_verify_date" Type="DateTime" Precision="3" />
+    <Property Name="form_verify_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_license_details" Relationship="Self.FK__tbl_trans__licen__151B244E" FromRole="tbl_transaction_master" ToRole="tbl_license_details" />
+    <NavigationProperty Name="tbl_ml_transaction_details" Relationship="Self.FK__tbl_trans__trans__6442E2C9" FromRole="tbl_transaction_master" ToRole="tbl_ml_transaction_details" />
+  </EntityType>
+  <Association Name="FK__tbl_licen__licen__02FC7413">
+    <End Role="tbl_license_mstr" Type="Self.tbl_license_mstr" Multiplicity="1" />
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_mstr">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_license_details">
+        <PropertyRef Name="license_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_licen__licen__2116E6DF">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="0..1" />
+    <End Role="tbl_license_mail" Type="Self.tbl_license_mail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_license_mail">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__licen__151B244E">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="0..1" />
+    <End Role="tbl_transaction_master" Type="Self.tbl_transaction_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_transaction_master">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__licen__65370702">
+    <End Role="tbl_license_details" Type="Self.tbl_license_details" Multiplicity="1" />
+    <End Role="tbl_ml_transaction_details" Type="Self.tbl_ml_transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_license_details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_ml_transaction_details">
+        <PropertyRef Name="license_dtls_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_trans__trans__6442E2C9">
+    <End Role="tbl_transaction_master" Type="Self.tbl_transaction_master" Multiplicity="1" />
+    <End Role="tbl_ml_transaction_details" Type="Self.tbl_ml_transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_transaction_master">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_ml_transaction_details">
+        <PropertyRef Name="transcation_mstr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PMC_Sparrow_DataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="rit_citizenOTPCount" EntityType="Self.rit_citizenOTPCount" />
+    <EntitySet Name="tbl_license_detail_temp" EntityType="Self.tbl_license_detail_temp" />
+    <EntitySet Name="tbl_license_details" EntityType="Self.tbl_license_details" />
+    <EntitySet Name="tbl_license_mail" EntityType="Self.tbl_license_mail" />
+    <EntitySet Name="tbl_license_mstr" EntityType="Self.tbl_license_mstr" />
+    <EntitySet Name="tbl_ml_transaction_details" EntityType="Self.tbl_ml_transaction_details" />
+    <EntitySet Name="tbl_trade_reciept" EntityType="Self.tbl_trade_reciept" />
+    <EntitySet Name="tbl_transaction_master" EntityType="Self.tbl_transaction_master" />
+    <AssociationSet Name="FK__tbl_licen__licen__02FC7413" Association="Self.FK__tbl_licen__licen__02FC7413">
+      <End Role="tbl_license_mstr" EntitySet="tbl_license_mstr" />
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_licen__licen__2116E6DF" Association="Self.FK__tbl_licen__licen__2116E6DF">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_license_mail" EntitySet="tbl_license_mail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__licen__151B244E" Association="Self.FK__tbl_trans__licen__151B244E">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_transaction_master" EntitySet="tbl_transaction_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__licen__65370702" Association="Self.FK__tbl_trans__licen__65370702">
+      <End Role="tbl_license_details" EntitySet="tbl_license_details" />
+      <End Role="tbl_ml_transaction_details" EntitySet="tbl_ml_transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_trans__trans__6442E2C9" Association="Self.FK__tbl_trans__trans__6442E2C9">
+      <End Role="tbl_transaction_master" EntitySet="tbl_transaction_master" />
+      <End Role="tbl_ml_transaction_details" EntitySet="tbl_ml_transaction_details" />
+    </AssociationSet>
+    <FunctionImport Name="rit_checkCustomerdocument" ReturnType="Collection(Int32)">
+      <Parameter Name="mobileNumber" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_checkForOTP" ReturnType="Collection(String)">
+      <Parameter Name="designation" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="ipaddress" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_ConsumerLicenseApplication" ReturnType="Collection(DateTime)">
+      <Parameter Name="occupancy_type_id" Mode="In" Type="String" />
+      <Parameter Name="mobile_no" Mode="In" Type="String" />
+      <Parameter Name="firm_name" Mode="In" Type="String" />
+      <Parameter Name="consumer_Name" Mode="In" Type="String" />
+      <Parameter Name="father_name" Mode="In" Type="String" />
+      <Parameter Name="email_id" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="firm_type" Mode="In" Type="String" />
+      <Parameter Name="buss_owner_name" Mode="In" Type="String" />
+      <Parameter Name="business_detail" Mode="In" Type="String" />
+      <Parameter Name="holding_no" Mode="In" Type="String" />
+      <Parameter Name="sales_tax_no" Mode="In" Type="String" />
+      <Parameter Name="Businessward_id" Mode="In" Type="Int32" />
+      <Parameter Name="business_address" Mode="In" Type="String" />
+      <Parameter Name="DOE" Mode="In" Type="DateTime" />
+      <Parameter Name="tin_no" Mode="In" Type="String" />
+      <Parameter Name="pan_no" Mode="In" Type="String" />
+      <Parameter Name="voter_id_no" Mode="In" Type="String" />
+      <Parameter Name="business_name" Mode="In" Type="Int32" />
+      <Parameter Name="BusinessSize" Mode="In" Type="String" />
+      <Parameter Name="license_duration" Mode="In" Type="Int32" />
+      <Parameter Name="total_Price" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="rit_ConsumerMobile" ReturnType="Collection(Int32)">
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="ConsumerName" Mode="In" Type="String" />
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_ConsumerRequestSave">
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="PropertyNo" Mode="In" Type="String" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+      <Parameter Name="mobileNo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_CounterLicenseApplication" ReturnType="Collection(DateTime)">
+      <Parameter Name="occupancy_type_id" Mode="In" Type="String" />
+      <Parameter Name="mobile_no" Mode="In" Type="String" />
+      <Parameter Name="firm_name" Mode="In" Type="String" />
+      <Parameter Name="consumer_Name" Mode="In" Type="String" />
+      <Parameter Name="firm_type" Mode="In" Type="String" />
+      <Parameter Name="holding_no" Mode="In" Type="String" />
+      <Parameter Name="Businessward_id" Mode="In" Type="Int32" />
+      <Parameter Name="business_address" Mode="In" Type="String" />
+      <Parameter Name="DOE" Mode="In" Type="DateTime" />
+      <Parameter Name="business_name" Mode="In" Type="Int32" />
+      <Parameter Name="BusinessSize" Mode="In" Type="String" />
+      <Parameter Name="license_duration" Mode="In" Type="Int32" />
+      <Parameter Name="total_Price" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="rit_fetchConsumer" ReturnType="Collection(PMC_Sparrow_DataModel.rit_fetchConsumer_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_fetchConsumerdetail" ReturnType="Collection(PMC_Sparrow_DataModel.rit_fetchConsumerdetail_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getBussinessAddressWard" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getBussinessAddressWard_Result)">
+      <Parameter Name="pid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getConsumerData" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getConsumerData_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getConsumernamob" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getConsumernamob_Result)">
+      <Parameter Name="mobile" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getConsumerPaymentForm" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getConsumerPaymentForm_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getConsumerPaymentReceipt" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getConsumerPaymentReceipt_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getCounterPaymentForm" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getCounterPaymentForm_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getCounterPaymentReceipt" ReturnType="Collection(PMC_Sparrow_DataModel.rit_getCounterPaymentReceipt_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getDesignation" ReturnType="Collection(String)" />
+    <FunctionImport Name="rit_getName" ReturnType="Collection(String)">
+      <Parameter Name="mobileNumber" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getRateAccBusiness" ReturnType="Collection(Decimal)">
+      <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="businessSize" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="rit_getTotalRate" ReturnType="Collection(Decimal)">
+      <Parameter Name="License_Year" Mode="In" Type="Int32" />
+      <Parameter Name="bussiness_size" Mode="In" Type="Decimal" />
+      <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="rit_SaveAgainConsumerLicenseApplication" ReturnType="Collection(DateTime)">
+      <Parameter Name="occupancy_type_id" Mode="In" Type="String" />
+      <Parameter Name="mobile_no" Mode="In" Type="String" />
+      <Parameter Name="firm_name" Mode="In" Type="String" />
+      <Parameter Name="consumer_Name" Mode="In" Type="String" />
+      <Parameter Name="father_name" Mode="In" Type="String" />
+      <Parameter Name="email_id" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="firm_type" Mode="In" Type="String" />
+      <Parameter Name="buss_owner_name" Mode="In" Type="String" />
+      <Parameter Name="business_detail" Mode="In" Type="String" />
+      <Parameter Name="holding_no" Mode="In" Type="String" />
+      <Parameter Name="sales_tax_no" Mode="In" Type="String" />
+      <Parameter Name="Businessward_id" Mode="In" Type="Int32" />
+      <Parameter Name="business_address" Mode="In" Type="String" />
+      <Parameter Name="DOE" Mode="In" Type="DateTime" />
+      <Parameter Name="tin_no" Mode="In" Type="String" />
+      <Parameter Name="pan_no" Mode="In" Type="String" />
+      <Parameter Name="voter_id_no" Mode="In" Type="String" />
+      <Parameter Name="business_name" Mode="In" Type="Int32" />
+      <Parameter Name="BusinessSize" Mode="In" Type="String" />
+      <Parameter Name="license_duration" Mode="In" Type="Int32" />
+      <Parameter Name="total_Price" Mode="In" Type="Decimal" />
+      <Parameter Name="application_no" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_saveConsumerRequest" ReturnType="Collection(PMC_Sparrow_DataModel.rit_saveConsumerRequest_Result)">
+      <Parameter Name="mobileNo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_saveCounterCustomerdocument">
+      <Parameter Name="isMandatory" Mode="In" Type="String" />
+      <Parameter Name="documentType" Mode="In" Type="String" />
+      <Parameter Name="fileName" Mode="In" Type="String" />
+      <Parameter Name="mobileNumber" Mode="In" Type="String" />
+      <Parameter Name="ip_address" Mode="In" Type="String" />
+      <Parameter Name="doc_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_saveCounterdata" ReturnType="Collection(Int32)">
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+      <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="fullName" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+      <Parameter Name="application_no" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_saveCounterPaymentSuccess" ReturnType="Collection(Int32)">
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+      <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="remarks" Mode="In" Type="String" />
+      <Parameter Name="paymentMode" Mode="In" Type="String" />
+      <Parameter Name="bank_name" Mode="In" Type="String" />
+      <Parameter Name="branch_name" Mode="In" Type="String" />
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+      <Parameter Name="application_no" Mode="In" Type="String" />
+      <Parameter Name="cheque_no" Mode="In" Type="String" />
+      <Parameter Name="cheque_date" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="rit_saveCustomerdocument">
+      <Parameter Name="isMandatory" Mode="In" Type="String" />
+      <Parameter Name="documentType" Mode="In" Type="String" />
+      <Parameter Name="fileName" Mode="In" Type="String" />
+      <Parameter Name="mobileNumber" Mode="In" Type="String" />
+      <Parameter Name="ip_address" Mode="In" Type="String" />
+      <Parameter Name="doc_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_savePaymentFailure" ReturnType="Collection(Int32)">
+      <Parameter Name="razorpay_order_id" Mode="In" Type="String" />
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+      <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="fullName" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_savePaymentSuccess" ReturnType="Collection(Int32)">
+      <Parameter Name="razorpay_order_id" Mode="In" Type="String" />
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
+      <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="fullName" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+      <Parameter Name="application_no" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rit_SelectBusinessPremises" ReturnType="Collection(PMC_Sparrow_DataModel.rit_SelectBusinessPremises_Result)" />
+    <FunctionImport Name="rit_SelectBusinessPremisesOwner" ReturnType="Collection(PMC_Sparrow_DataModel.rit_SelectBusinessPremisesOwner_Result)" />
+    <FunctionImport Name="rit_SelectCategory" ReturnType="Collection(PMC_Sparrow_DataModel.rit_SelectCategory_Result)" />
+    <FunctionImport Name="rit_SelectFirmType" ReturnType="Collection(PMC_Sparrow_DataModel.rit_SelectFirmType_Result)" />
+    <FunctionImport Name="rit_SelectLisenceYear" ReturnType="Collection(PMC_Sparrow_DataModel.rit_SelectLisenceYear_Result)" />
+    <FunctionImport Name="rit_Selectwardno" ReturnType="Collection(PMC_Sparrow_DataModel.rit_Selectwardno_Result)" />
+    <FunctionImport Name="rit_UpdateConsumerLicenseApplication" ReturnType="Collection(PMC_Sparrow_DataModel.rit_UpdateConsumerLicenseApplication_Result)">
+      <Parameter Name="application_no" Mode="In" Type="String" />
+      <Parameter Name="mobileNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="SelectBusinessPremises" ReturnType="Collection(PMC_Sparrow_DataModel.SelectBusinessPremises_Result)" />
+    <FunctionImport Name="SelectCategory" ReturnType="Collection(PMC_Sparrow_DataModel.SelectCategory_Result)" />
+    <FunctionImport Name="TaxCal" ReturnType="Collection(PMC_Sparrow_DataModel.TaxCal_Result)">
+      <Parameter Name="AY" Mode="In" Type="DateTime" />
+      <Parameter Name="occupancyTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="streetTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="useTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="constructionTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="usageTypeID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateCurrentPaymentReceipt">
+      <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="SAS" Mode="In" Type="String" />
+      <Parameter Name="postingdate" Mode="In" Type="String" />
+      <Parameter Name="PAYMENTMODE" Mode="In" Type="String" />
+      <Parameter Name="paymentdate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdatePaymentReceipt">
+      <Parameter Name="pid" Mode="In" Type="Int32" />
+      <Parameter Name="RECEIPT_DATE" Mode="In" Type="String" />
+      <Parameter Name="PAYMENTMODE" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="rit_fetchConsumer_Result">
+    <Property Type="String" Name="email_id" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="holding_no" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="rit_fetchConsumerdetail_Result">
+    <Property Type="String" Name="email_id" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="consumer_name" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="rit_getBussinessAddressWard_Result">
+    <Property Type="String" Name="ward_no" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="address" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="rit_getConsumerData_Result">
+    <Property Type="String" Name="consumer_name" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="doe" Nullable="false" />
+    <Property Type="String" Name="bussiness_address" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="circle" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="buss_owner_name" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="holding_no" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="payment_status" Nullable="true" />
+    <Property Type="String" Name="ward_id" Nullable="true" MaxLength="20" />
+    <Property Type="Decimal" Name="total_Price" Nullable="true" Precision="20" Scale="2" />
+    <Property Type="Int32" Name="Is_Near_Expiry" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="rit_getConsumernamob_Result">
+    <Property Type="String" Name="owner_name" Nullable="true" MaxLength="500" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="rit_getConsumerPaymentForm_Result">
+    <Property Type="String" Name="firm_name" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="Int64" Name="ward_id" Nullable="false" />
+    <Property Type="String" Name="bussiness_address" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="owner_name" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="doe" Nullable="false" />
+    <Property Type="String" Name="BussinessType1" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="sqare_feet" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="total_Price" Nullable="true" Precision="20" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="rit_getConsumerPaymentReceipt_Result">
+    <Property Type="String" Name="consumer_name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="firm_name" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="Int64" Name="ward_id" Nullable="false" />
+    <Property Type="String" Name="owner_name" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="doe" Nullable="false" />
+    <Property Type="String" Name="address" Nullable="true" />
+    <Property Type="String" Name="sqare_feet" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="receipt_no" Nullable="true" MaxLength="80" />
+    <Property Type="DateTime" Name="timestamp" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="total_payable_amount" Nullable="true" Precision="20" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="rit_getCounterPaymentForm_Result">
+    <Property Type="String" Name="firm_name" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="Int64" Name="ward_id" Nullable="false" />
+    <Property Type="String" Name="bussiness_address" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="consumer_name" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="doe" Nullable="false" />
+    <Property Type="String" Name="BussinessType1" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="sqare_feet" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="total_Price" Nullable="true" Precision="20" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="rit_getCounterPaymentReceipt_Result">
+    <Property Type="String" Name="consumer_name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="firm_name" Nullable="false" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="Int64" Name="ward_id" Nullable="false" />
+    <Property Type="String" Name="consumer_name1" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="doe" Nullable="false" />
+    <Property Type="String" Name="address" Nullable="true" />
+    <Property Type="String" Name="sqare_feet" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="receipt_no" Nullable="true" MaxLength="80" />
+    <Property Type="DateTime" Name="timestamp" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="total_payable_amount" Nullable="true" Precision="20" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="rit_saveConsumerRequest_Result">
+    <Property Type="String" Name="email_id" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="holding_no" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="rit_SelectBusinessPremises_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="bussiness_size" Nullable="false" MaxLength="200" />
+    <Property Type="Decimal" Name="rate" Nullable="false" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="rit_SelectBusinessPremisesOwner_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="occupency_type" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="rit_SelectCategory_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="category_name" Nullable="false" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="rit_SelectFirmType_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="firm_type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="rit_SelectLisenceYear_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="license_year" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="rit_Selectwardno_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="ward_no" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="rit_UpdateConsumerLicenseApplication_Result">
+    <Property Type="Int64" Name="id" Nullable="true" />
+    <Property Type="Int64" Name="ulb_id" Nullable="true" />
+    <Property Type="Int64" Name="ward_id" Nullable="true" />
+    <Property Type="String" Name="license_no" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="doe" Nullable="true" />
+    <Property Type="String" Name="consumer_name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="father_name" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="mobile_no" Nullable="true" />
+    <Property Type="String" Name="email_id" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="address" Nullable="true" />
+    <Property Type="String" Name="firm_name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="bussiness_detail" Nullable="true" MaxLength="400" />
+    <Property Type="String" Name="bussiness_address" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="occupancy_type_id" Nullable="true" />
+    <Property Type="String" Name="pan_no" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="voter_id_no" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="sales_tax_no" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="holding_no" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="tin_no" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="timestamp" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="user_id" Nullable="true" />
+    <Property Type="String" Name="status" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="bussiness_name" Nullable="true" />
+    <Property Type="String" Name="buss_owner_name" Nullable="true" MaxLength="400" />
+    <Property Type="Int32" Name="applicant_ward_id" Nullable="true" />
+    <Property Type="Int64" Name="id1" Nullable="true" />
+    <Property Type="Int64" Name="license_master_id" Nullable="true" />
+    <Property Type="Int32" Name="ulb_id1" Nullable="true" />
+    <Property Type="String" Name="application_no" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="application_date" Nullable="true" />
+    <Property Type="Int32" Name="no_of_employee" Nullable="true" />
+    <Property Type="Int32" Name="license_type_id" Nullable="true" />
+    <Property Type="String" Name="level_remarks" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="from_year" Nullable="true" />
+    <Property Type="DateTime" Name="issued_on" Nullable="true" />
+    <Property Type="DateTime" Name="valid_upto" Nullable="true" />
+    <Property Type="Int64" Name="approved_user_id" Nullable="true" />
+    <Property Type="DateTime" Name="approved_date" Nullable="true" />
+    <Property Type="DateTime" Name="timestamp1" Nullable="true" Precision="23" />
+    <Property Type="Int64" Name="user_id1" Nullable="true" />
+    <Property Type="Int32" Name="status1" Nullable="true" />
+    <Property Type="Int32" Name="payment_status" Nullable="true" />
+    <Property Type="String" Name="sqare_feet" Nullable="true" MaxLength="20" />
+    <Property Type="Int64" Name="firm_type_id" Nullable="true" />
+    <Property Type="String" Name="apply_from" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="license_duration" Nullable="true" />
+    <Property Type="String" Name="applicant_categoty_type" Nullable="true" MaxLength="5" />
+    <Property Type="Decimal" Name="total_Price" Nullable="true" Precision="20" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="SelectBusinessPremises_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="bussiness_size" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="SelectCategory_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="String" Name="category_name" Nullable="false" MaxLength="500" />
+  </ComplexType>
+  <ComplexType Name="TaxCal_Result">
+    <Property Type="Int32" Name="arvMasterID" Nullable="true" />
+    <Property Type="Decimal" Name="Factor" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="UnitAreaRate" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="HoldingTax" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="govMultipicationFactor" Nullable="true" />
+  </ComplexType>
+</Schema>

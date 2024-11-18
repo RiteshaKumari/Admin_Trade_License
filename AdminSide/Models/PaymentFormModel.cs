@@ -35,6 +35,12 @@ namespace AdminSide.Models
         [Required(ErrorMessage = "Bank Branch No is required")]
         public string DDbankBranch { get; set; }
 
+        [Required(ErrorMessage = "Bank Branch No is required")]
+        public string RTGSbankBranch { get; set; }
+
+        [Required(ErrorMessage = "Bank Name No is required")]
+        public string RTGSbankName { get; set; }
+
         [Required(ErrorMessage = "RTGS No is required")]
         public string RTGSNo { get; set; }
 

@@ -1,13 +1,23 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+﻿@{
+    ViewBag.Title = "Error";
+}
+
+@*<h2>An Error Occurred(ese showing due to  <customErrors mode="On" /> in web config and  [HandleError] in controller)</h2>*@
+
+@model string
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2>Error</h2>
+<div>
+    @if (!string.IsNullOrEmpty(Model))
+    {
+        <p>@Model</p>
+    }
+    else
+    {
+        <p>An unexpected error has occurred.</p>
+    }
+</div>
